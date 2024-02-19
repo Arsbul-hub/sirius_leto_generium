@@ -144,7 +144,7 @@ class Ui_MainWindow(object):
         self.marginHorizontalSlider.setTickInterval(3)
         self.marginHorizontalSlider.setObjectName("marginHorizontalSlider")
         self.openOutputImageButton = QtWidgets.QPushButton(self.visualisationImageControlls)
-        self.openOutputImageButton.setGeometry(QtCore.QRect(420, 10, 141, 28))
+        self.openOutputImageButton.setGeometry(QtCore.QRect(410, 10, 151, 28))
         self.openOutputImageButton.setObjectName("openOutputImageButton")
         self.marginVerticalSlider = QtWidgets.QSlider(self.visualisationImageControlls)
         self.marginVerticalSlider.setGeometry(QtCore.QRect(10, 100, 501, 22))

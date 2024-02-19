@@ -414,9 +414,9 @@
        <widget class="QPushButton" name="openOutputImageButton">
         <property name="geometry">
          <rect>
-          <x>420</x>
+          <x>410</x>
           <y>10</y>
-          <width>141</width>
+          <width>151</width>
           <height>28</height>
          </rect>
         </property>

@@ -93,7 +93,7 @@ class App(QtWidgets.QMainWindow, design.Ui_MainWindow):
             self.electrophoresisImage.setPixmap(pixmap)
             if self.electrophoresis_image_path is not None and self.western_blot_image_path is not None:
                 self.startLoadingButton.setEnabled(True)
-                self.visualisationImage.setText("Загрузка изображения, подождите")
+                self.visualisationImage.setText("Загрузка изображения, подождите...")
                 self.thread_manager.add_task("visualization", self.update_visualization_image)
                 self.visualisationImageControlls.setEnabled(True)
 
