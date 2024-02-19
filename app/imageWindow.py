@@ -26,6 +26,7 @@ class ImageViewer(QDialog):
         self.label.setScaledContents(True)  # масштабировать содержимое QLabel под размер окна
         self.label.setSizePolicy(QSizePolicy.Ignored, QSizePolicy.Ignored)  # игнорировать политику размеров QLabel
         self.x, self.y = pixmap.width(), pixmap.height()
+
     def mousePressEvent(self, event):
         if event.button() == Qt.LeftButton:
             self.startingPos = event.pos()
