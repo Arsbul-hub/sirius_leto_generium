@@ -16,7 +16,7 @@ class ImageViewer(QDialog):
     def open_image(self, image_np):
         self.image_np = image_np
         height, width, _ = image_np.shape
-        self.x, self.y = width, height
+
         bytesPerLine = 3 * width
         image = QImage(self.image_np.data, width, height, bytesPerLine, QImage.Format_RGB888)
 
@@ -25,7 +25,7 @@ class ImageViewer(QDialog):
         self.label.setPixmap(pixmap)
         self.label.setScaledContents(True)  # масштабировать содержимое QLabel под размер окна
         self.label.setSizePolicy(QSizePolicy.Ignored, QSizePolicy.Ignored)  # игнорировать политику размеров QLabel
-
+        self.x, self.y = pixmap.width(), pixmap.height()
     def mousePressEvent(self, event):
         if event.button() == Qt.LeftButton:
             self.startingPos = event.pos()
@@ -54,4 +54,5 @@ class ImageViewer(QDialog):
         pix = QPixmap(image)
         pix = pix.scaledToWidth(int(self.x))
         pix = pix.scaledToHeight(int(self.y))
+
         self.label.setPixmap(pix)

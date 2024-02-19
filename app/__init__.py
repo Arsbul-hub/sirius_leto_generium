@@ -62,6 +62,7 @@ class App(QtWidgets.QMainWindow, design.Ui_MainWindow):
         dlg = ImageViewer()
         dlg.open_image(image_np)
         dlg.exec_()
+        self.clear_notify()
 
     def update_margin_on_sliders(self):
         self.marginVerticalSlider.setValue(self.marginVerticalSliderValue.value())
@@ -120,7 +121,7 @@ class App(QtWidgets.QMainWindow, design.Ui_MainWindow):
                 self.visualisationImageControlls.setEnabled(True)
 
     def update_visualization_image(self):
-        self.visualisationImage.clear()
+
         pil_image = self.load_visualization_image()
         image = QImage(pil_image.tobytes(), pil_image.size[0], pil_image.size[1], QImage.Format_RGB888)
         pixmap = QPixmap(image)
