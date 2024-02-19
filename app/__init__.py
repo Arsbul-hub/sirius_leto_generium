@@ -11,12 +11,12 @@ import numpy as np
 from PIL import Image
 from PyQt5 import QtWidgets
 from PyQt5.QtGui import QPixmap, QImage
-from PyQt5.QtWidgets import QFileDialog
+from PyQt5.QtWidgets import QFileDialog, QApplication
 
 from app import design
 
 from PIL import ImageQt
-
+from app.imageWindow import ImageViewer
 from app.ThreadManager import ThreadManager
 from app.tools import *
 
@@ -57,10 +57,11 @@ class App(QtWidgets.QMainWindow, design.Ui_MainWindow):
         self.screensWidget.setCurrentIndex(1)
 
     def open_visualization_in_window(self, image_np):
-        self.analyzeStatus.setText("Открытие изображения...")
-        print(1122)
-        self.thread_manager.add_task("opening_image", lambda: Image.fromarray(image_np).show(),
-                                     self.analyzeStatus.clear())
+        self.set_notify("Открытие изображения...")
+
+        dlg = ImageViewer()
+        dlg.open_image(image_np)
+        dlg.exec_()
 
     def update_margin_on_sliders(self):
         self.marginVerticalSlider.setValue(self.marginVerticalSliderValue.value())
@@ -91,6 +92,7 @@ class App(QtWidgets.QMainWindow, design.Ui_MainWindow):
             self.electrophoresisImage.setPixmap(pixmap)
             if self.electrophoresis_image_path is not None and self.western_blot_image_path is not None:
                 self.startLoadingButton.setEnabled(True)
+                self.visualisationImage.setText("Загрузка изображения, подождите")
                 self.thread_manager.add_task("visualization", self.update_visualization_image)
                 self.visualisationImageControlls.setEnabled(True)
 
@@ -113,10 +115,12 @@ class App(QtWidgets.QMainWindow, design.Ui_MainWindow):
             self.westernBlotImage.setPixmap(pixmap)
             if self.western_blot_image_path is not None and self.electrophoresis_image_path is not None:
                 self.startLoadingButton.setEnabled(True)
+                self.visualisationImage.setText("Загрузка изображения, подождите")
                 self.thread_manager.add_task("visualization", self.update_visualization_image)
                 self.visualisationImageControlls.setEnabled(True)
 
     def update_visualization_image(self):
+        self.visualisationImage.clear()
         pil_image = self.load_visualization_image()
         image = QImage(pil_image.tobytes(), pil_image.size[0], pil_image.size[1], QImage.Format_RGB888)
         pixmap = QPixmap(image)
@@ -144,12 +148,12 @@ class App(QtWidgets.QMainWindow, design.Ui_MainWindow):
         return blend
 
     def load_images(self):
-        self.analyzeStatus.setText("Анализ данных, подождите...")
+        self.set_notify("Анализ данных, подождите...")
         self.startLoadingButton.setEnabled(False)
         self.analyzer.load_images(self.electrophoresis_image_path, self.western_blot_image_path)
         self.analyzer.load_models_detections()
         self.load_all_images()
-
+        self.clear_notify()
         # self.screensWidget.setCurrentIndex(1)
 
     def switch_next(self):
@@ -197,7 +201,7 @@ class App(QtWidgets.QMainWindow, design.Ui_MainWindow):
         # self.openElectrophoresisImageButton.clicked.connect(lambda: self.open_image(electrophoresis_visualized))
 
         self.startLoadingButton.setEnabled(True)
-        self.analyzeStatus.clear()
+
         self.openOutputImageButton.disconnect()
         self.openOutputImageButton.clicked.connect(lambda: self.open_visualization_in_window(out_visualized))
 
@@ -236,7 +240,7 @@ class App(QtWidgets.QMainWindow, design.Ui_MainWindow):
             path = Path(filename)
             today = datetime.datetime.now().strftime('%Y-%m-%d %H-%M-%S')
             document_path = path.joinpath(f"Результаты анализа {today}").absolute()
-            self.analyzeStatus.setText("Сохранение...")
+            self.set_notify("Сохранение...")
             with open(f"{document_path}.txt", "w") as document:
                 text = ""
                 text += f"Распознанные области: {len(kwargs['boxes'])}\n"
@@ -270,7 +274,14 @@ class App(QtWidgets.QMainWindow, design.Ui_MainWindow):
             self.thread_manager.add_task("save image",
                                          lambda: Image.fromarray(kwargs["out_image"]).save(
                                              path.joinpath(f"Снимок {today}.png").absolute()),
-                                         lambda: self.analyzeStatus.setText(""))
+                                         lambda: self.clear_notify)
+
+    def set_notify(self, message):
+        self.clear_notify()
+        self.analyzeStatus.setText(message)
+
+    def clear_notify(self):
+        self.analyzeStatus.clear()
 
     def closeEvent(self, event):
         self.thread_manager.stop_loop()
