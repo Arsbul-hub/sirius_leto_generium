@@ -34,7 +34,6 @@ class App(QtWidgets.QMainWindow, design.Ui_MainWindow):
         self.analyzer = None
         self.electrophoresis_image_path = None
         self.western_blot_image_path = None
-
         self.loadElectrophoresisImageButton.clicked.connect(self.load_electrophoresis)
         self.loadWesternBlotImageButton.clicked.connect(self.load_western_blot)
         self.startLoadingButton.clicked.connect(self.load_images)
@@ -82,7 +81,6 @@ class App(QtWidgets.QMainWindow, design.Ui_MainWindow):
             "",
             "Изображения (*.png *.jpg)"
         )
-
         if filename and ok:
             path = Path(filename)
             self.electrophoresis_image_path = str(path.absolute())
@@ -104,7 +102,6 @@ class App(QtWidgets.QMainWindow, design.Ui_MainWindow):
             "",
             "Изображения (*.png *.jpg)"
         )
-
         if filename and ok:
             path = Path(filename)
             self.western_blot_image_path = str(path.absolute())
@@ -169,10 +166,12 @@ class App(QtWidgets.QMainWindow, design.Ui_MainWindow):
         # w_boxes, w_classes, w_scores = self.analyzer.western_blot_model.get_detections()
 
         # self.thread_manager.add_task("analyze", self.analyzer.analyze, read_analyze_data, timer=1)
-        boxes, classes, scores = self.analyzer.analyze()
-        e_boxes, e_classes, e_scores, w_boxes, w_classes, w_scores = self.analyzer.analyze_any()
 
-        out_visualized = self.analyzer.visualize(boxes, classes, scores, self.load_visualization_image(),
+        boxes, classes, scores, btypes = self.analyzer.analyze(x_offset_hint=self.marginHorizontalSlider.value() / 100,
+                                                               y_offset_hint=self.marginVerticalSlider.value() / 100)
+        e_boxes, e_classes, e_scores, w_boxes, w_classes, w_scores, any_btypes = self.analyzer.analyze_any()
+
+        out_visualized = self.analyzer.visualize(boxes, classes, scores, btypes, self.load_visualization_image(),
                                                  self.marginHorizontalSlider.value() / 100,
                                                  self.marginVerticalSlider.value() / 100)
 

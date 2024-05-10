@@ -1,5 +1,3 @@
-
-
 import numpy as np
 from PIL import Image
 from PyQt5.QtGui import QPixmap, QImage
@@ -38,5 +36,3 @@ def find_intersection(rect1, rect2):
         return x_top_left, y_top_left, x_bottom_right, y_bottom_right
     else:
         return None
-
-
