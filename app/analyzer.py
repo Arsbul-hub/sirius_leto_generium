@@ -1,3 +1,4 @@
+import math
 from random import randint
 
 import cv2
@@ -140,7 +141,13 @@ class Analyzer:
         for c, s, b, t in zip(classes, scores, boxes, btypes):
             x1, y1, x2, y2 = b
             border_color = 0, 0, 255
-            border_radius = 6
+
+            border_radius = round(width * height ** (1 / 20)) # % от площади
+            if border_radius == 0:
+                border_radius = 1
+
+            font_size = round(width * height ** (1 / 20))
+
             if t not in viz_allow:
                 continue
             if t == ELECTROPHORESIS_TYPE and ELECTROPHORESIS_TYPE in viz_allow:
@@ -159,7 +166,7 @@ class Analyzer:
 
             if t == PROTEIN_TYPE and PROTEIN_TYPE in viz_allow:
                 border_color = 255, 100, 100
-                border_radius = 20
+
                 x1 = int(x1 * width)
                 x2 = int(x2 * width)
                 y1 = int(y1 * height)
@@ -167,7 +174,7 @@ class Analyzer:
             cv2.rectangle(image_np, (x1, y1), (x2, y2), border_color, border_radius)
             label = f"Class: {c}, Score: {s:.2f}"
             cv2.putText(image_np, label, (x1, y1 - 10),
-                        cv2.FONT_HERSHEY_SIMPLEX, 0.7, border_color, 2)
+                        cv2.FONT_HERSHEY_SIMPLEX, font_size, border_color, border_radius / 2)
         return image_np
 
 

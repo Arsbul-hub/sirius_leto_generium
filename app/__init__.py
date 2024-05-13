@@ -34,6 +34,8 @@ class App(QtWidgets.QMainWindow, design.Ui_MainWindow):
         self.analyzer = None
         self.electrophoresis_image_path = None
         self.western_blot_image_path = None
+        self.electrophoresis_image = None
+        self.western_blot_image = None
         self.loadElectrophoresisImageButton.clicked.connect(self.load_electrophoresis)
         self.loadWesternBlotImageButton.clicked.connect(self.load_western_blot)
         self.startLoadingButton.clicked.connect(self.load_images)
@@ -119,15 +121,16 @@ class App(QtWidgets.QMainWindow, design.Ui_MainWindow):
 
     def update_visualization_image(self):
 
-        pil_image = self.load_visualization_image()
-        image = QImage(pil_image.tobytes(), pil_image.size[0], pil_image.size[1], QImage.Format_RGB888)
+        resized_image = self.get_resized_visualization_image()
+        image = QImage(resized_image.tobytes(), resized_image.size[0], resized_image.size[1], QImage.Format_RGB888)
+
         pixmap = QPixmap(image)
         pixmap = pixmap.scaledToWidth(self.visualisationImage.width())
         pixmap = pixmap.scaledToHeight(self.visualisationImage.height())
         self.visualisationImage.setPixmap(pixmap)
-        self.openOutputImageButton.clicked.connect(lambda: self.open_image(pil_image))
+        self.openOutputImageButton.clicked.connect(lambda: self.open_image(self.get_original_visualization_image()))
 
-    def load_visualization_image(self):
+    def get_original_visualization_image(self):
         image1 = Image.open(self.electrophoresis_image_path)
         image2 = Image.open(self.western_blot_image_path)
         # image2.resize(image1.size)
@@ -136,13 +139,52 @@ class App(QtWidgets.QMainWindow, design.Ui_MainWindow):
         blend = image1.copy()
 
         # Смещение второго изображения
-        x_offset = int(self.marginHorizontalSlider.value() / 100 * image2.width)  # Смещение вправо на 40 пикселей
-        y_offset = int(self.marginVerticalSlider.value() / 100 * image2.height)
+        x_offset = int(
+            self.marginHorizontalSlider.value() / 100 * image2.width)  # Смещение по горизонтали на n пикселей
+        y_offset = int(self.marginVerticalSlider.value() / 100 * image2.height)  # Смещение по вертикали на n пикселей
         mask = image2.convert('L').point(lambda x: min(x, 170))  # Создание маски для второго изображения
         image2.putalpha(mask)  # Установка альфа-канала второго изображения из маски
 
         # Наложение второго изображения смещенным на новое изображение
         blend.paste(image2, (x_offset, y_offset), mask=image2)
+
+        return blend
+
+    def get_resized_visualization_image(self):
+        if not self.electrophoresis_image:
+            self.electrophoresis_image = Image.open(self.electrophoresis_image_path)
+        if not self.western_blot_image:
+            self.western_blot_image = Image.open(self.western_blot_image_path)
+        if self.electrophoresis_image.width > 1500:
+            self.electrophoresis_image = self.electrophoresis_image.resize(
+                (1500, int(1500 * (self.electrophoresis_image.height / self.electrophoresis_image.width))))
+        elif self.electrophoresis_image.height > 1500:
+            self.electrophoresis_image = self.electrophoresis_image.resize(
+                (int(1500 * (self.electrophoresis_image.width / self.electrophoresis_image.height)), 1500))
+        if self.western_blot_image.width > 1500:
+            self.western_blot_image = self.western_blot_image.resize(
+                (1500, int(1500 * (self.western_blot_image.height / self.western_blot_image.width))))
+        elif self.western_blot_image.height > 1500:
+            self.western_blot_image = self.western_blot_image.resize(
+                (int(1500 * (self.western_blot_image.width / self.western_blot_image.height)), 1500))
+
+        # self.western_blot_image.resize(self.electrophoresis_image.size)
+        # self.western_blot_image = self.western_blot_image.resize(self.electrophoresis_image.size)
+        # blend = Image.blend(self.electrophoresis_image, self.western_blot_image, alpha=0.5)
+        blend = self.electrophoresis_image.copy()
+
+        # Смещение второго изображения
+        x_offset = int(
+            self.marginHorizontalSlider.value() / 100 * self.western_blot_image.width)  # Смещение по горизонтали на n пикселей
+        y_offset = int(
+            self.marginVerticalSlider.value() / 100 * self.western_blot_image.height)  # Смещение по вертикали на n пикселей
+        mask = self.western_blot_image.convert('L').point(
+            lambda x: min(x, 170))  # Создание маски для второго изображения
+        self.western_blot_image.putalpha(mask)  # Установка альфа-канала второго изображения из маски
+
+        # Наложение второго изображения смещенным на новое изображение
+        blend.paste(self.western_blot_image, (x_offset, y_offset), mask=self.western_blot_image)
+
         return blend
 
     def load_images(self):
@@ -170,11 +212,14 @@ class App(QtWidgets.QMainWindow, design.Ui_MainWindow):
         boxes, classes, scores, btypes = self.analyzer.analyze(x_offset_hint=self.marginHorizontalSlider.value() / 100,
                                                                y_offset_hint=self.marginVerticalSlider.value() / 100)
         e_boxes, e_classes, e_scores, w_boxes, w_classes, w_scores, any_btypes = self.analyzer.analyze_any()
-
-        out_visualized = self.analyzer.visualize(boxes, classes, scores, btypes, self.load_visualization_image(),
-                                                 self.marginHorizontalSlider.value() / 100,
-                                                 self.marginVerticalSlider.value() / 100)
-
+        resized_image = self.get_resized_visualization_image()
+        original_image = self.get_original_visualization_image()
+        out_visualized_original = self.analyzer.visualize(boxes, classes, scores, btypes, original_image,
+                                                          self.marginHorizontalSlider.value() / 100,
+                                                          self.marginVerticalSlider.value() / 100)
+        out_visualized_resized = self.analyzer.visualize(boxes, classes, scores, btypes, resized_image,
+                                                         self.marginHorizontalSlider.value() / 100,
+                                                         self.marginVerticalSlider.value() / 100)
         # e_pixmap = convert_to_pixmap(electrophoresis_visualized)
 
         # e_pixmap = e_pixmap.scaledToWidth(self.electrophoresisImage.width())
@@ -183,9 +228,11 @@ class App(QtWidgets.QMainWindow, design.Ui_MainWindow):
         # w_pixmap = w_pixmap.scaledToWidth(self.westernBlotImage.width())
         # w_pixmap = w_pixmap.scaledToHeight(self.westernBlotImage.height())
 
-        o_pixmap = convert_to_pixmap(out_visualized)
+        o_pixmap = convert_to_pixmap(out_visualized_resized)
+
         o_pixmap = o_pixmap.scaledToWidth(self.visualisationImage.width())
         o_pixmap = o_pixmap.scaledToHeight(self.visualisationImage.height())
+        self.visualisationImage.setPixmap(o_pixmap)
 
         # self.electrophoresisImage.setPixmap(QPixmap(e_pixmap))
         # self.westernBlotImage.setPixmap(QPixmap(w_pixmap))
@@ -195,20 +242,18 @@ class App(QtWidgets.QMainWindow, design.Ui_MainWindow):
         # pixmap = pixmap.scaledToWidth(self.visualisationImage.width())
         # pixmap = pixmap.scaledToHeight(self.visualisationImage.height())
 
-        self.visualisationImage.setPixmap(o_pixmap)
-
         # self.openWesternBlotImageButton.clicked.connect(lambda: self.open_image(western_blot_visualized))
         # self.openElectrophoresisImageButton.clicked.connect(lambda: self.open_image(electrophoresis_visualized))
 
         self.startLoadingButton.setEnabled(True)
 
         self.openOutputImageButton.disconnect()
-        self.openOutputImageButton.clicked.connect(lambda: self.open_visualization_in_window(out_visualized))
+        self.openOutputImageButton.clicked.connect(lambda: self.open_visualization_in_window(out_visualized_original))
 
         h, w, _ = self.analyzer.electrophoresis_image.shape
         self.saveDataButton.disconnect()
         self.saveDataButton.clicked.connect(lambda: self.save_data(base_image_size=(w, h),
-                                                                   out_image=out_visualized,
+                                                                   out_image=out_visualized_original,
                                                                    boxes=boxes, classes=classes, scores=scores,
                                                                    e_boxes=e_boxes, e_classes=e_classes,
                                                                    e_scores=e_scores,
