@@ -21,6 +21,7 @@ from app.ThreadManager import ThreadManager
 from app.tools import *
 
 
+
 class App(QtWidgets.QMainWindow, design.Ui_MainWindow):
     def __init__(self):
         super().__init__()
@@ -216,7 +217,7 @@ class App(QtWidgets.QMainWindow, design.Ui_MainWindow):
         original_image = self.get_original_visualization_image()
         out_visualized_original = self.analyzer.visualize(boxes, classes, scores, btypes, original_image,
                                                           self.marginHorizontalSlider.value() / 100,
-                                                          self.marginVerticalSlider.value() / 100)
+                                                          self.marginVerticalSlider.value() / 100, [PROTEIN_TYPE])
         out_visualized_resized = self.analyzer.visualize(boxes, classes, scores, btypes, resized_image,
                                                          self.marginHorizontalSlider.value() / 100,
                                                          self.marginVerticalSlider.value() / 100)

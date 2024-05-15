@@ -2,6 +2,10 @@ import numpy as np
 from PIL import Image
 from PyQt5.QtGui import QPixmap, QImage
 
+WESTERN_BLOT_TYPE = 0
+ELECTROPHORESIS_TYPE = 1
+PROTEIN_TYPE = 2
+
 
 def convert_to_np(image_path):
     pil_image = Image.open(image_path)
