@@ -25,6 +25,7 @@ if __name__ == "__main__":
     # Set the exception hook to our wrapping function
     sys.excepthook = my_exception_hook
     app = QtWidgets.QApplication(sys.argv)  # Новый экземпляр QApplication
+    #app.setStyle("Windows")
     window = App()  # Создаём объект класса ExampleApp
     window.show()  # Показываем окно
     app.exec_()  # и запускаем приложение

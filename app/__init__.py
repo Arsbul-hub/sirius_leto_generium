@@ -26,6 +26,7 @@ class App(QtWidgets.QMainWindow, design.Ui_MainWindow):
     def __init__(self):
         super().__init__()
         self.setupUi(self)
+
         self.setFixedSize(self.size())
         self.screensWidget.setCurrentIndex(0)
 

@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1140</width>
-    <height>702</height>
+    <width>1500</width>
+    <height>821</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -19,8 +19,8 @@
      <rect>
       <x>0</x>
       <y>0</y>
-      <width>1131</width>
-      <height>699</height>
+      <width>1491</width>
+      <height>780</height>
      </rect>
     </property>
     <property name="currentIndex">
@@ -32,8 +32,8 @@
        <rect>
         <x>0</x>
         <y>280</y>
-        <width>1141</width>
-        <height>101</height>
+        <width>1491</width>
+        <height>131</height>
        </rect>
       </property>
       <property name="layoutDirection">
@@ -42,16 +42,20 @@
       <widget class="QLabel" name="label_5">
        <property name="geometry">
         <rect>
-         <x>390</x>
-         <y>0</y>
-         <width>361</width>
-         <height>41</height>
+         <x>0</x>
+         <y>10</y>
+         <width>1491</width>
+         <height>61</height>
         </rect>
        </property>
        <property name="font">
         <font>
-         <pointsize>10</pointsize>
+         <family>inter</family>
+         <pointsize>12</pointsize>
         </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">font-family: &quot;inter&quot;</string>
        </property>
        <property name="text">
         <string>Выполняется загрузка моделей. Подождите...</string>
@@ -63,16 +67,20 @@
       <widget class="QLabel" name="current_loading_model">
        <property name="geometry">
         <rect>
-         <x>390</x>
-         <y>40</y>
-         <width>361</width>
-         <height>51</height>
+         <x>0</x>
+         <y>60</y>
+         <width>1491</width>
+         <height>61</height>
         </rect>
        </property>
        <property name="font">
         <font>
-         <pointsize>10</pointsize>
+         <family>inter</family>
+         <pointsize>12</pointsize>
         </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">font-family: &quot;inter&quot;</string>
        </property>
        <property name="text">
         <string>Пусто</string>
@@ -85,17 +93,23 @@
      <widget class="QLabel" name="label_2">
       <property name="geometry">
        <rect>
-        <x>470</x>
-        <y>580</y>
-        <width>211</width>
-        <height>61</height>
+        <x>10</x>
+        <y>650</y>
+        <width>1481</width>
+        <height>111</height>
        </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-image: url(:/background-image/generium_logo.png);
+background-repeat: no-repeat;
+background-position: center;
+</string>
       </property>
       <property name="text">
        <string/>
       </property>
       <property name="pixmap">
-       <pixmap>app/icons/generium_logo.png</pixmap>
+       <pixmap>../../.designer/backup/app/icons/generium_logo.png</pixmap>
       </property>
       <property name="alignment">
        <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -107,24 +121,24 @@
       <property name="geometry">
        <rect>
         <x>10</x>
-        <y>340</y>
-        <width>251</width>
-        <height>311</height>
+        <y>400</y>
+        <width>391</width>
+        <height>361</height>
        </rect>
       </property>
       <widget class="QWidget" name="widget_4" native="true">
        <property name="geometry">
         <rect>
          <x>0</x>
-         <y>200</y>
-         <width>251</width>
-         <height>101</height>
+         <y>260</y>
+         <width>391</width>
+         <height>111</height>
         </rect>
        </property>
        <widget class="QLabel" name="label_6">
         <property name="geometry">
          <rect>
-          <x>0</x>
+          <x>70</x>
           <y>0</y>
           <width>251</width>
           <height>31</height>
@@ -151,7 +165,7 @@
         </property>
         <property name="geometry">
          <rect>
-          <x>40</x>
+          <x>110</x>
           <y>40</y>
           <width>171</width>
           <height>31</height>
@@ -164,7 +178,7 @@
        <widget class="QLabel" name="westernBlotImageName">
         <property name="geometry">
          <rect>
-          <x>10</x>
+          <x>80</x>
           <y>80</y>
           <width>231</width>
           <height>20</height>
@@ -185,9 +199,9 @@
        <property name="geometry">
         <rect>
          <x>0</x>
-         <y>0</y>
-         <width>251</width>
-         <height>181</height>
+         <y>10</y>
+         <width>391</width>
+         <height>241</height>
         </rect>
        </property>
        <property name="font">
@@ -211,23 +225,23 @@
        <rect>
         <x>10</x>
         <y>10</y>
-        <width>251</width>
-        <height>311</height>
+        <width>391</width>
+        <height>371</height>
        </rect>
       </property>
       <widget class="QWidget" name="widget_5" native="true">
        <property name="geometry">
         <rect>
          <x>0</x>
-         <y>200</y>
-         <width>251</width>
-         <height>111</height>
+         <y>240</y>
+         <width>391</width>
+         <height>121</height>
         </rect>
        </property>
        <widget class="QPushButton" name="loadElectrophoresisImageButton">
         <property name="geometry">
          <rect>
-          <x>40</x>
+          <x>110</x>
           <y>50</y>
           <width>171</width>
           <height>31</height>
@@ -240,7 +254,7 @@
        <widget class="QLabel" name="electrophoresisImageName">
         <property name="geometry">
          <rect>
-          <x>10</x>
+          <x>80</x>
           <y>90</y>
           <width>231</width>
           <height>20</height>
@@ -259,7 +273,7 @@
        <widget class="QLabel" name="label_7">
         <property name="geometry">
          <rect>
-          <x>0</x>
+          <x>70</x>
           <y>10</y>
           <width>251</width>
           <height>31</height>
@@ -286,8 +300,8 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>251</width>
-         <height>181</height>
+         <width>391</width>
+         <height>241</height>
         </rect>
        </property>
        <property name="font">
@@ -309,10 +323,10 @@
      <widget class="QWidget" name="widget" native="true">
       <property name="geometry">
        <rect>
-        <x>290</x>
+        <x>429</x>
         <y>10</y>
-        <width>571</width>
-        <height>601</height>
+        <width>661</width>
+        <height>751</height>
        </rect>
       </property>
       <widget class="QLabel" name="visualisationImage">
@@ -320,8 +334,8 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>571</width>
-         <height>401</height>
+         <width>661</width>
+         <height>461</height>
         </rect>
        </property>
        <property name="font">
@@ -346,9 +360,9 @@
        <property name="geometry">
         <rect>
          <x>0</x>
-         <y>410</y>
-         <width>571</width>
-         <height>191</height>
+         <y>470</y>
+         <width>661</width>
+         <height>281</height>
         </rect>
        </property>
        <widget class="QPushButton" name="startLoadingButton">
@@ -359,9 +373,35 @@
          <rect>
           <x>10</x>
           <y>10</y>
-          <width>151</width>
-          <height>31</height>
+          <width>241</width>
+          <height>51</height>
          </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QPushButton:enabled {
+	background-color: #7576D6;
+	color: #FFFFFF;
+	border: none;
+	border-radius: 5px;
+	font-family: &quot;inter&quot;;
+	font-size: 18px;
+}
+
+QPushButton:disabled {
+	background-color: #a1a2d8;
+	color: #FFFFFF;
+	border: none;
+	border-radius: 5px;
+	font-family: &quot;inter&quot;;
+	font-size: 18px;
+}
+QPushButton:hover {
+    background-color:  #8e8fd7;
+}
+QPushButton:pressed {
+    background-color:  #58599e;
+}
+</string>
         </property>
         <property name="text">
          <string>Начать обработку</string>
@@ -370,8 +410,8 @@
        <widget class="QSpinBox" name="marginHorizontalSliderValue">
         <property name="geometry">
          <rect>
-          <x>520</x>
-          <y>150</y>
+          <x>610</x>
+          <y>250</y>
           <width>42</width>
           <height>22</height>
          </rect>
@@ -386,14 +426,17 @@
          <number>10</number>
         </property>
        </widget>
-       <widget class="QSlider" name="marginHorizontalSlider">
+       <widget class="QSlider" name="marginVerticalSlider">
         <property name="geometry">
          <rect>
           <x>10</x>
-          <y>150</y>
-          <width>501</width>
+          <y>250</y>
+          <width>591</width>
           <height>22</height>
          </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true"/>
         </property>
         <property name="minimum">
          <number>-50</number>
@@ -412,26 +455,64 @@
         </property>
        </widget>
        <widget class="QPushButton" name="openOutputImageButton">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
         <property name="geometry">
          <rect>
           <x>410</x>
           <y>10</y>
-          <width>151</width>
-          <height>28</height>
+          <width>241</width>
+          <height>51</height>
          </rect>
+        </property>
+        <property name="font">
+         <font>
+          <family>inter</family>
+          <pointsize>-1</pointsize>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QPushButton:enabled {
+	background-color: #7576D6;
+	color: #FFFFFF;
+	border: none;
+	border-radius: 5px;
+	font-family: &quot;inter&quot;;
+	font-size: 18px;
+}
+
+QPushButton:disabled {
+	background-color: #a1a2d8;
+	color: #FFFFFF;
+	border: none;
+	border-radius: 5px;
+	font-family: &quot;inter&quot;;
+	font-size: 18px;
+}
+QPushButton:hover {
+    background-color:  #8e8fd7;
+}
+QPushButton:pressed {
+    background-color:  #58599e;
+}
+</string>
         </property>
         <property name="text">
          <string>Открыть полностью</string>
         </property>
        </widget>
-       <widget class="QSlider" name="marginVerticalSlider">
+       <widget class="QSlider" name="marginHorizontalSlider">
         <property name="geometry">
          <rect>
           <x>10</x>
-          <y>100</y>
-          <width>501</width>
+          <y>190</y>
+          <width>591</width>
           <height>22</height>
          </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true"/>
         </property>
         <property name="minimum">
          <number>-50</number>
@@ -458,8 +539,8 @@
        <widget class="QSpinBox" name="marginVerticalSliderValue">
         <property name="geometry">
          <rect>
-          <x>520</x>
-          <y>100</y>
+          <x>610</x>
+          <y>190</y>
           <width>42</width>
           <height>22</height>
          </rect>
@@ -474,16 +555,24 @@
        <widget class="QLabel" name="label">
         <property name="geometry">
          <rect>
-          <x>190</x>
-          <y>70</y>
-          <width>201</width>
-          <height>20</height>
+          <x>10</x>
+          <y>110</y>
+          <width>641</width>
+          <height>31</height>
          </rect>
         </property>
         <property name="font">
          <font>
-          <pointsize>9</pointsize>
+          <family>inter</family>
+          <pointsize>11</pointsize>
+          <weight>50</weight>
+          <bold>false</bold>
          </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">font-family: &quot;inter&quot;;
+color: black;
+font-weight: &quot;normal&quot;;</string>
         </property>
         <property name="text">
          <string>Регулировка позиции</string>
@@ -495,9 +584,9 @@
        <widget class="QLabel" name="analyzeStatus">
         <property name="geometry">
          <rect>
-          <x>170</x>
-          <y>10</y>
-          <width>241</width>
+          <x>150</x>
+          <y>80</y>
+          <width>371</width>
           <height>31</height>
          </rect>
         </property>
@@ -511,15 +600,73 @@
          <bool>true</bool>
         </property>
        </widget>
+       <widget class="QLabel" name="label_4">
+        <property name="geometry">
+         <rect>
+          <x>240</x>
+          <y>160</y>
+          <width>191</width>
+          <height>21</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <family>inter</family>
+          <pointsize>10</pointsize>
+          <weight>50</weight>
+          <bold>false</bold>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">font-family: &quot;inter&quot;;
+color: black;
+font-weight: &quot;normal&quot;;</string>
+        </property>
+        <property name="text">
+         <string>Отступ по ширине:</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_8">
+        <property name="geometry">
+         <rect>
+          <x>240</x>
+          <y>220</y>
+          <width>191</width>
+          <height>21</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <family>inter</family>
+          <pointsize>10</pointsize>
+          <weight>50</weight>
+          <bold>false</bold>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">font-family: &quot;inter&quot;;
+color: black;
+font-weight: &quot;normal&quot;;</string>
+        </property>
+        <property name="text">
+         <string>Отступ по высоте:</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
       </widget>
      </widget>
      <widget class="QWidget" name="widget_6" native="true">
       <property name="geometry">
        <rect>
-        <x>890</x>
+        <x>1120</x>
         <y>10</y>
-        <width>241</width>
-        <height>641</height>
+        <width>371</width>
+        <height>751</height>
        </rect>
       </property>
       <widget class="QLabel" name="label_3">
@@ -545,7 +692,7 @@
         <rect>
          <x>0</x>
          <y>30</y>
-         <width>316</width>
+         <width>371</width>
          <height>36</height>
         </rect>
        </property>
@@ -558,7 +705,7 @@
         <rect>
          <x>0</x>
          <y>70</y>
-         <width>241</width>
+         <width>371</width>
          <height>35</height>
         </rect>
        </property>
@@ -580,7 +727,7 @@
         <rect>
          <x>0</x>
          <y>120</y>
-         <width>241</width>
+         <width>371</width>
          <height>35</height>
         </rect>
        </property>
@@ -602,7 +749,7 @@
         <rect>
          <x>0</x>
          <y>170</y>
-         <width>241</width>
+         <width>371</width>
          <height>71</height>
         </rect>
        </property>
@@ -639,10 +786,10 @@
      <widget class="Line" name="line">
       <property name="geometry">
        <rect>
-        <x>259</x>
+        <x>400</x>
         <y>10</y>
         <width>31</width>
-        <height>641</height>
+        <height>741</height>
        </rect>
       </property>
       <property name="orientation">
@@ -652,10 +799,10 @@
      <widget class="Line" name="line_2">
       <property name="geometry">
        <rect>
-        <x>860</x>
+        <x>1090</x>
         <y>10</y>
         <width>31</width>
-        <height>641</height>
+        <height>751</height>
        </rect>
       </property>
       <property name="orientation">
@@ -666,8 +813,8 @@
       <property name="geometry">
        <rect>
         <x>10</x>
-        <y>320</y>
-        <width>251</width>
+        <y>380</y>
+        <width>391</width>
         <height>21</height>
        </rect>
       </property>
@@ -683,13 +830,15 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1140</width>
+     <width>1500</width>
      <height>27</height>
     </rect>
    </property>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
- <resources/>
+ <resources>
+  <include location="app/resources/images.qrc"/>
+ </resources>
  <connections/>
 </ui>
