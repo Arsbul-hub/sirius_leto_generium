@@ -7,9 +7,13 @@ ELECTROPHORESIS_TYPE = 1
 PROTEIN_TYPE = 2
 
 
-def convert_to_np(image_path):
-    pil_image = Image.open(image_path)
+def convert_pil_to_np(pil_image):
     return np.array(pil_image)
+
+
+def load_image_as_np(image_path):
+    pil_image = Image.open(image_path)
+    return np.array(pil_image)[:, :, ::-1].copy()
 
 
 def convert_to_pixmap(image):

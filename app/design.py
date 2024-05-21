@@ -14,16 +14,20 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(1500, 821)
+        MainWindow.setEnabled(True)
+        MainWindow.resize(1500, 876)
+        MainWindow.setStatusTip("")
+        MainWindow.setStyleSheet("")
+        MainWindow.setTabShape(QtWidgets.QTabWidget.Rounded)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.screensWidget = QtWidgets.QStackedWidget(self.centralwidget)
-        self.screensWidget.setGeometry(QtCore.QRect(0, 0, 1491, 780))
+        self.screensWidget.setGeometry(QtCore.QRect(0, 0, 1491, 851))
         self.screensWidget.setObjectName("screensWidget")
         self.page = QtWidgets.QWidget()
         self.page.setObjectName("page")
         self.widget_7 = QtWidgets.QWidget(self.page)
-        self.widget_7.setGeometry(QtCore.QRect(0, 280, 1491, 131))
+        self.widget_7.setGeometry(QtCore.QRect(0, 340, 1491, 131))
         self.widget_7.setLayoutDirection(QtCore.Qt.LeftToRight)
         self.widget_7.setObjectName("widget_7")
         self.label_5 = QtWidgets.QLabel(self.widget_7)
@@ -45,7 +49,7 @@ class Ui_MainWindow(object):
         self.current_loading_model.setAlignment(QtCore.Qt.AlignCenter)
         self.current_loading_model.setObjectName("current_loading_model")
         self.label_2 = QtWidgets.QLabel(self.page)
-        self.label_2.setGeometry(QtCore.QRect(10, 650, 1481, 111))
+        self.label_2.setGeometry(QtCore.QRect(10, 760, 1481, 111))
         self.label_2.setStyleSheet("background-image: url(:/background-image/generium_logo.png);\n"
 "background-repeat: no-repeat;\n"
 "background-position: center;\n"
@@ -58,91 +62,39 @@ class Ui_MainWindow(object):
         self.page_1 = QtWidgets.QWidget()
         self.page_1.setObjectName("page_1")
         self.widget_3 = QtWidgets.QWidget(self.page_1)
-        self.widget_3.setGeometry(QtCore.QRect(10, 400, 391, 361))
+        self.widget_3.setGeometry(QtCore.QRect(10, 433, 391, 421))
         self.widget_3.setObjectName("widget_3")
         self.widget_4 = QtWidgets.QWidget(self.widget_3)
-        self.widget_4.setGeometry(QtCore.QRect(0, 260, 391, 111))
+        self.widget_4.setGeometry(QtCore.QRect(0, 250, 391, 171))
         self.widget_4.setObjectName("widget_4")
-        self.label_6 = QtWidgets.QLabel(self.widget_4)
-        self.label_6.setGeometry(QtCore.QRect(70, 0, 251, 31))
-        font = QtGui.QFont()
-        font.setPointSize(9)
-        self.label_6.setFont(font)
-        self.label_6.setLayoutDirection(QtCore.Qt.LeftToRight)
-        self.label_6.setAlignment(QtCore.Qt.AlignCenter)
-        self.label_6.setObjectName("label_6")
-        self.loadWesternBlotImageButton = QtWidgets.QPushButton(self.widget_4)
-        self.loadWesternBlotImageButton.setEnabled(True)
-        self.loadWesternBlotImageButton.setGeometry(QtCore.QRect(110, 40, 171, 31))
-        self.loadWesternBlotImageButton.setObjectName("loadWesternBlotImageButton")
         self.westernBlotImageName = QtWidgets.QLabel(self.widget_4)
-        self.westernBlotImageName.setGeometry(QtCore.QRect(80, 80, 231, 20))
+        self.westernBlotImageName.setEnabled(True)
+        self.westernBlotImageName.setGeometry(QtCore.QRect(5, 130, 381, 31))
+        font = QtGui.QFont()
+        font.setFamily("inter")
+        font.setPointSize(10)
+        self.westernBlotImageName.setFont(font)
+        self.westernBlotImageName.setStyleSheet("QLabel {\n"
+"        font-family: \"inter\";\n"
+"\n"
+"}")
         self.westernBlotImageName.setAlignment(QtCore.Qt.AlignCenter)
         self.westernBlotImageName.setWordWrap(True)
         self.westernBlotImageName.setObjectName("westernBlotImageName")
-        self.westernBlotImage = QtWidgets.QLabel(self.widget_3)
-        self.westernBlotImage.setGeometry(QtCore.QRect(0, 10, 391, 241))
+        self.openOutputWesternBlotButton = QtWidgets.QPushButton(self.widget_4)
+        self.openOutputWesternBlotButton.setEnabled(False)
+        self.openOutputWesternBlotButton.setGeometry(QtCore.QRect(20, 50, 170, 50))
         font = QtGui.QFont()
-        font.setPointSize(8)
-        self.westernBlotImage.setFont(font)
-        self.westernBlotImage.setStyleSheet("border: 1px solid gray;")
-        self.westernBlotImage.setAlignment(QtCore.Qt.AlignCenter)
-        self.westernBlotImage.setObjectName("westernBlotImage")
-        self.widget_2 = QtWidgets.QWidget(self.page_1)
-        self.widget_2.setGeometry(QtCore.QRect(10, 10, 391, 371))
-        self.widget_2.setObjectName("widget_2")
-        self.widget_5 = QtWidgets.QWidget(self.widget_2)
-        self.widget_5.setGeometry(QtCore.QRect(0, 240, 391, 121))
-        self.widget_5.setObjectName("widget_5")
-        self.loadElectrophoresisImageButton = QtWidgets.QPushButton(self.widget_5)
-        self.loadElectrophoresisImageButton.setGeometry(QtCore.QRect(110, 50, 171, 31))
-        self.loadElectrophoresisImageButton.setObjectName("loadElectrophoresisImageButton")
-        self.electrophoresisImageName = QtWidgets.QLabel(self.widget_5)
-        self.electrophoresisImageName.setGeometry(QtCore.QRect(80, 90, 231, 20))
-        self.electrophoresisImageName.setAlignment(QtCore.Qt.AlignCenter)
-        self.electrophoresisImageName.setWordWrap(True)
-        self.electrophoresisImageName.setObjectName("electrophoresisImageName")
-        self.label_7 = QtWidgets.QLabel(self.widget_5)
-        self.label_7.setGeometry(QtCore.QRect(70, 10, 251, 31))
-        font = QtGui.QFont()
-        font.setPointSize(9)
-        self.label_7.setFont(font)
-        self.label_7.setLayoutDirection(QtCore.Qt.LeftToRight)
-        self.label_7.setAlignment(QtCore.Qt.AlignCenter)
-        self.label_7.setObjectName("label_7")
-        self.electrophoresisImage = QtWidgets.QLabel(self.widget_2)
-        self.electrophoresisImage.setGeometry(QtCore.QRect(0, 0, 391, 241))
-        font = QtGui.QFont()
-        font.setPointSize(8)
-        self.electrophoresisImage.setFont(font)
-        self.electrophoresisImage.setStyleSheet("border: 1px solid gray;")
-        self.electrophoresisImage.setAlignment(QtCore.Qt.AlignCenter)
-        self.electrophoresisImage.setObjectName("electrophoresisImage")
-        self.widget = QtWidgets.QWidget(self.page_1)
-        self.widget.setGeometry(QtCore.QRect(429, 10, 661, 751))
-        self.widget.setObjectName("widget")
-        self.visualisationImage = QtWidgets.QLabel(self.widget)
-        self.visualisationImage.setGeometry(QtCore.QRect(0, 0, 661, 461))
-        font = QtGui.QFont()
-        font.setPointSize(9)
-        self.visualisationImage.setFont(font)
-        self.visualisationImage.setStyleSheet("border: 1px solid gray;")
-        self.visualisationImage.setAlignment(QtCore.Qt.AlignCenter)
-        self.visualisationImage.setObjectName("visualisationImage")
-        self.visualisationImageControlls = QtWidgets.QWidget(self.widget)
-        self.visualisationImageControlls.setEnabled(False)
-        self.visualisationImageControlls.setGeometry(QtCore.QRect(0, 470, 661, 281))
-        self.visualisationImageControlls.setObjectName("visualisationImageControlls")
-        self.startLoadingButton = QtWidgets.QPushButton(self.visualisationImageControlls)
-        self.startLoadingButton.setEnabled(False)
-        self.startLoadingButton.setGeometry(QtCore.QRect(10, 10, 241, 51))
-        self.startLoadingButton.setStyleSheet("QPushButton:enabled {\n"
+        font.setFamily("inter")
+        font.setPointSize(10)
+        self.openOutputWesternBlotButton.setFont(font)
+        self.openOutputWesternBlotButton.setStyleSheet("QPushButton:enabled {\n"
 "    background-color: #7576D6;\n"
 "    color: #FFFFFF;\n"
 "    border: none;\n"
 "    border-radius: 5px;\n"
 "    font-family: \"inter\";\n"
-"    font-size: 18px;\n"
+"\n"
 "}\n"
 "\n"
 "QPushButton:disabled {\n"
@@ -151,7 +103,226 @@ class Ui_MainWindow(object):
 "    border: none;\n"
 "    border-radius: 5px;\n"
 "    font-family: \"inter\";\n"
-"    font-size: 18px;\n"
+"\n"
+"}\n"
+"QPushButton:hover {\n"
+"    background-color:  #8e8fd7;\n"
+"}\n"
+"QPushButton:pressed {\n"
+"    background-color:  #58599e;\n"
+"}\n"
+"")
+        self.openOutputWesternBlotButton.setObjectName("openOutputWesternBlotButton")
+        self.loadWesternBlotImageButton = QtWidgets.QPushButton(self.widget_4)
+        self.loadWesternBlotImageButton.setEnabled(True)
+        self.loadWesternBlotImageButton.setGeometry(QtCore.QRect(200, 50, 171, 51))
+        font = QtGui.QFont()
+        font.setFamily("inter")
+        font.setPointSize(10)
+        self.loadWesternBlotImageButton.setFont(font)
+        self.loadWesternBlotImageButton.setStyleSheet("QPushButton:enabled {\n"
+"    background-color: #7576D6;\n"
+"    color: #FFFFFF;\n"
+"    border: none;\n"
+"    border-radius: 5px;\n"
+"    font-family: \"inter\";\n"
+"\n"
+"}\n"
+"\n"
+"QPushButton:disabled {\n"
+"    background-color: #a1a2d8;\n"
+"    color: #FFFFFF;\n"
+"    border: none;\n"
+"    border-radius: 5px;\n"
+"    font-family: \"inter\";\n"
+"\n"
+"}\n"
+"QPushButton:hover {\n"
+"    background-color:  #8e8fd7;\n"
+"}\n"
+"QPushButton:pressed {\n"
+"    background-color:  #58599e;\n"
+"}\n"
+"")
+        self.loadWesternBlotImageButton.setInputMethodHints(QtCore.Qt.ImhNone)
+        self.loadWesternBlotImageButton.setText("Загрузить\n"
+"Изображение")
+        self.loadWesternBlotImageButton.setObjectName("loadWesternBlotImageButton")
+        self.westernBlotImage = QtWidgets.QLabel(self.widget_3)
+        self.westernBlotImage.setGeometry(QtCore.QRect(20, 50, 350, 230))
+        font = QtGui.QFont()
+        font.setFamily("inter")
+        font.setPointSize(8)
+        self.westernBlotImage.setFont(font)
+        self.westernBlotImage.setStyleSheet("\n"
+"QLabel {\n"
+"        font-family: \"inter\";\n"
+"        border: 1px solid gray;\n"
+"}")
+        self.westernBlotImage.setAlignment(QtCore.Qt.AlignCenter)
+        self.westernBlotImage.setObjectName("westernBlotImage")
+        self.label_6 = QtWidgets.QLabel(self.widget_3)
+        self.label_6.setGeometry(QtCore.QRect(70, 10, 251, 31))
+        font = QtGui.QFont()
+        font.setFamily("inter")
+        font.setPointSize(11)
+        self.label_6.setFont(font)
+        self.label_6.setLayoutDirection(QtCore.Qt.LeftToRight)
+        self.label_6.setStyleSheet("QLabel {\n"
+"        font-family: \"inter\";\n"
+"\n"
+"}")
+        self.label_6.setAlignment(QtCore.Qt.AlignCenter)
+        self.label_6.setObjectName("label_6")
+        self.widget_2 = QtWidgets.QWidget(self.page_1)
+        self.widget_2.setGeometry(QtCore.QRect(10, 10, 391, 401))
+        self.widget_2.setObjectName("widget_2")
+        self.widget_5 = QtWidgets.QWidget(self.widget_2)
+        self.widget_5.setGeometry(QtCore.QRect(0, 240, 391, 161))
+        self.widget_5.setObjectName("widget_5")
+        self.openOutputElectrophoresisButton = QtWidgets.QPushButton(self.widget_5)
+        self.openOutputElectrophoresisButton.setEnabled(False)
+        self.openOutputElectrophoresisButton.setGeometry(QtCore.QRect(20, 50, 170, 50))
+        font = QtGui.QFont()
+        font.setFamily("inter")
+        font.setPointSize(10)
+        self.openOutputElectrophoresisButton.setFont(font)
+        self.openOutputElectrophoresisButton.setStyleSheet("QPushButton:enabled {\n"
+"    background-color: #7576D6;\n"
+"    color: #FFFFFF;\n"
+"    border: none;\n"
+"    border-radius: 5px;\n"
+"    font-family: \"inter\";\n"
+"\n"
+"}\n"
+"\n"
+"QPushButton:disabled {\n"
+"    background-color: #a1a2d8;\n"
+"    color: #FFFFFF;\n"
+"    border: none;\n"
+"    border-radius: 5px;\n"
+"    font-family: \"inter\";\n"
+"\n"
+"}\n"
+"QPushButton:hover {\n"
+"    background-color:  #8e8fd7;\n"
+"}\n"
+"QPushButton:pressed {\n"
+"    background-color:  #58599e;\n"
+"}\n"
+"")
+        self.openOutputElectrophoresisButton.setObjectName("openOutputElectrophoresisButton")
+        self.electrophoresisImageName = QtWidgets.QLabel(self.widget_5)
+        self.electrophoresisImageName.setGeometry(QtCore.QRect(5, 120, 381, 31))
+        font = QtGui.QFont()
+        font.setFamily("inter")
+        font.setPointSize(10)
+        self.electrophoresisImageName.setFont(font)
+        self.electrophoresisImageName.setStyleSheet("QLabel {\n"
+"        font-family: \"inter\";\n"
+"}")
+        self.electrophoresisImageName.setAlignment(QtCore.Qt.AlignCenter)
+        self.electrophoresisImageName.setWordWrap(True)
+        self.electrophoresisImageName.setObjectName("electrophoresisImageName")
+        self.loadElectrophoresisImageButton = QtWidgets.QPushButton(self.widget_5)
+        self.loadElectrophoresisImageButton.setGeometry(QtCore.QRect(200, 50, 170, 50))
+        font = QtGui.QFont()
+        font.setFamily("inter")
+        font.setPointSize(10)
+        self.loadElectrophoresisImageButton.setFont(font)
+        self.loadElectrophoresisImageButton.setStyleSheet("QPushButton:enabled {\n"
+"    background-color: #7576D6;\n"
+"    color: #FFFFFF;\n"
+"    border: none;\n"
+"    border-radius: 5px;\n"
+"    font-family: \"inter\";\n"
+"\n"
+"}\n"
+"\n"
+"QPushButton:disabled {\n"
+"    background-color: #a1a2d8;\n"
+"    color: #FFFFFF;\n"
+"    border: none;\n"
+"    border-radius: 5px;\n"
+"    font-family: \"inter\";\n"
+"\n"
+"}\n"
+"QPushButton:hover {\n"
+"    background-color:  #8e8fd7;\n"
+"}\n"
+"QPushButton:pressed {\n"
+"    background-color:  #58599e;\n"
+"}\n"
+"")
+        self.loadElectrophoresisImageButton.setObjectName("loadElectrophoresisImageButton")
+        self.electrophoresisImage = QtWidgets.QLabel(self.widget_2)
+        self.electrophoresisImage.setGeometry(QtCore.QRect(20, 40, 350, 230))
+        font = QtGui.QFont()
+        font.setFamily("inter")
+        font.setPointSize(8)
+        self.electrophoresisImage.setFont(font)
+        self.electrophoresisImage.setStyleSheet("\n"
+"QLabel {\n"
+"        font-family: \"inter\";\n"
+"        border: 1px solid gray;\n"
+"}")
+        self.electrophoresisImage.setAlignment(QtCore.Qt.AlignCenter)
+        self.electrophoresisImage.setObjectName("electrophoresisImage")
+        self.label_7 = QtWidgets.QLabel(self.widget_2)
+        self.label_7.setGeometry(QtCore.QRect(70, 0, 251, 31))
+        font = QtGui.QFont()
+        font.setFamily("inter")
+        font.setPointSize(11)
+        self.label_7.setFont(font)
+        self.label_7.setLayoutDirection(QtCore.Qt.LeftToRight)
+        self.label_7.setStyleSheet("QLabel {\n"
+"        font-family: \"inter\";\n"
+"}")
+        self.label_7.setAlignment(QtCore.Qt.AlignCenter)
+        self.label_7.setObjectName("label_7")
+        self.widget = QtWidgets.QWidget(self.page_1)
+        self.widget.setGeometry(QtCore.QRect(429, 10, 661, 841))
+        self.widget.setObjectName("widget")
+        self.visualisationImage = QtWidgets.QLabel(self.widget)
+        self.visualisationImage.setGeometry(QtCore.QRect(10, 0, 641, 461))
+        font = QtGui.QFont()
+        font.setFamily("inter")
+        font.setPointSize(9)
+        self.visualisationImage.setFont(font)
+        self.visualisationImage.setStyleSheet("\n"
+"QLabel {\n"
+"        font-family: \"inter\";\n"
+"        border: 1px solid gray;\n"
+"}")
+        self.visualisationImage.setAlignment(QtCore.Qt.AlignCenter)
+        self.visualisationImage.setObjectName("visualisationImage")
+        self.visualisationImageControlls = QtWidgets.QWidget(self.widget)
+        self.visualisationImageControlls.setEnabled(False)
+        self.visualisationImageControlls.setGeometry(QtCore.QRect(10, 470, 641, 371))
+        self.visualisationImageControlls.setObjectName("visualisationImageControlls")
+        self.startLoadingButton = QtWidgets.QPushButton(self.visualisationImageControlls)
+        self.startLoadingButton.setEnabled(False)
+        self.startLoadingButton.setGeometry(QtCore.QRect(0, 10, 241, 51))
+        font = QtGui.QFont()
+        font.setFamily("inter")
+        font.setPointSize(11)
+        self.startLoadingButton.setFont(font)
+        self.startLoadingButton.setStyleSheet("QPushButton:enabled {\n"
+"    background-color: #7576D6;\n"
+"    color: #FFFFFF;\n"
+"    border: none;\n"
+"    border-radius: 5px;\n"
+"    font-family: \"inter\";\n"
+"\n"
+"}\n"
+"\n"
+"QPushButton:disabled {\n"
+"    background-color: #a1a2d8;\n"
+"    color: #FFFFFF;\n"
+"    border: none;\n"
+"    border-radius: 5px;\n"
+"    font-family: \"inter\";\n"
+"\n"
 "}\n"
 "QPushButton:hover {\n"
 "    background-color:  #8e8fd7;\n"
@@ -162,13 +333,13 @@ class Ui_MainWindow(object):
 "")
         self.startLoadingButton.setObjectName("startLoadingButton")
         self.marginHorizontalSliderValue = QtWidgets.QSpinBox(self.visualisationImageControlls)
-        self.marginHorizontalSliderValue.setGeometry(QtCore.QRect(610, 250, 42, 22))
+        self.marginHorizontalSliderValue.setGeometry(QtCore.QRect(600, 330, 42, 22))
         self.marginHorizontalSliderValue.setMinimum(-50)
         self.marginHorizontalSliderValue.setMaximum(50)
         self.marginHorizontalSliderValue.setDisplayIntegerBase(10)
         self.marginHorizontalSliderValue.setObjectName("marginHorizontalSliderValue")
         self.marginVerticalSlider = QtWidgets.QSlider(self.visualisationImageControlls)
-        self.marginVerticalSlider.setGeometry(QtCore.QRect(10, 250, 591, 22))
+        self.marginVerticalSlider.setGeometry(QtCore.QRect(0, 330, 591, 22))
         self.marginVerticalSlider.setStyleSheet("")
         self.marginVerticalSlider.setMinimum(-50)
         self.marginVerticalSlider.setMaximum(50)
@@ -178,10 +349,10 @@ class Ui_MainWindow(object):
         self.marginVerticalSlider.setObjectName("marginVerticalSlider")
         self.openOutputImageButton = QtWidgets.QPushButton(self.visualisationImageControlls)
         self.openOutputImageButton.setEnabled(False)
-        self.openOutputImageButton.setGeometry(QtCore.QRect(410, 10, 241, 51))
+        self.openOutputImageButton.setGeometry(QtCore.QRect(400, 10, 241, 51))
         font = QtGui.QFont()
         font.setFamily("inter")
-        font.setPointSize(-1)
+        font.setPointSize(11)
         self.openOutputImageButton.setFont(font)
         self.openOutputImageButton.setStyleSheet("QPushButton:enabled {\n"
 "    background-color: #7576D6;\n"
@@ -189,7 +360,7 @@ class Ui_MainWindow(object):
 "    border: none;\n"
 "    border-radius: 5px;\n"
 "    font-family: \"inter\";\n"
-"    font-size: 18px;\n"
+"\n"
 "}\n"
 "\n"
 "QPushButton:disabled {\n"
@@ -198,7 +369,7 @@ class Ui_MainWindow(object):
 "    border: none;\n"
 "    border-radius: 5px;\n"
 "    font-family: \"inter\";\n"
-"    font-size: 18px;\n"
+"\n"
 "}\n"
 "QPushButton:hover {\n"
 "    background-color:  #8e8fd7;\n"
@@ -209,7 +380,7 @@ class Ui_MainWindow(object):
 "")
         self.openOutputImageButton.setObjectName("openOutputImageButton")
         self.marginHorizontalSlider = QtWidgets.QSlider(self.visualisationImageControlls)
-        self.marginHorizontalSlider.setGeometry(QtCore.QRect(10, 190, 591, 22))
+        self.marginHorizontalSlider.setGeometry(QtCore.QRect(0, 240, 591, 22))
         self.marginHorizontalSlider.setStyleSheet("")
         self.marginHorizontalSlider.setMinimum(-50)
         self.marginHorizontalSlider.setMaximum(50)
@@ -220,12 +391,12 @@ class Ui_MainWindow(object):
         self.marginHorizontalSlider.setTickInterval(3)
         self.marginHorizontalSlider.setObjectName("marginHorizontalSlider")
         self.marginVerticalSliderValue = QtWidgets.QSpinBox(self.visualisationImageControlls)
-        self.marginVerticalSliderValue.setGeometry(QtCore.QRect(610, 190, 42, 22))
+        self.marginVerticalSliderValue.setGeometry(QtCore.QRect(600, 240, 42, 22))
         self.marginVerticalSliderValue.setMinimum(-50)
         self.marginVerticalSliderValue.setMaximum(50)
         self.marginVerticalSliderValue.setObjectName("marginVerticalSliderValue")
         self.label = QtWidgets.QLabel(self.visualisationImageControlls)
-        self.label.setGeometry(QtCore.QRect(10, 110, 641, 31))
+        self.label.setGeometry(QtCore.QRect(0, 130, 641, 31))
         font = QtGui.QFont()
         font.setFamily("inter")
         font.setPointSize(11)
@@ -238,13 +409,13 @@ class Ui_MainWindow(object):
         self.label.setAlignment(QtCore.Qt.AlignCenter)
         self.label.setObjectName("label")
         self.analyzeStatus = QtWidgets.QLabel(self.visualisationImageControlls)
-        self.analyzeStatus.setGeometry(QtCore.QRect(150, 80, 371, 31))
+        self.analyzeStatus.setGeometry(QtCore.QRect(0, 80, 641, 31))
         self.analyzeStatus.setText("")
         self.analyzeStatus.setAlignment(QtCore.Qt.AlignCenter)
         self.analyzeStatus.setWordWrap(True)
         self.analyzeStatus.setObjectName("analyzeStatus")
         self.label_4 = QtWidgets.QLabel(self.visualisationImageControlls)
-        self.label_4.setGeometry(QtCore.QRect(240, 160, 191, 21))
+        self.label_4.setGeometry(QtCore.QRect(230, 200, 191, 21))
         font = QtGui.QFont()
         font.setFamily("inter")
         font.setPointSize(10)
@@ -257,7 +428,7 @@ class Ui_MainWindow(object):
         self.label_4.setAlignment(QtCore.Qt.AlignCenter)
         self.label_4.setObjectName("label_4")
         self.label_8 = QtWidgets.QLabel(self.visualisationImageControlls)
-        self.label_8.setGeometry(QtCore.QRect(240, 220, 191, 21))
+        self.label_8.setGeometry(QtCore.QRect(230, 290, 191, 21))
         font = QtGui.QFont()
         font.setFamily("inter")
         font.setPointSize(10)
@@ -270,63 +441,125 @@ class Ui_MainWindow(object):
         self.label_8.setAlignment(QtCore.Qt.AlignCenter)
         self.label_8.setObjectName("label_8")
         self.widget_6 = QtWidgets.QWidget(self.page_1)
-        self.widget_6.setGeometry(QtCore.QRect(1120, 10, 371, 751))
+        self.widget_6.setGeometry(QtCore.QRect(1120, 10, 371, 841))
         self.widget_6.setObjectName("widget_6")
         self.label_3 = QtWidgets.QLabel(self.widget_6)
-        self.label_3.setGeometry(QtCore.QRect(0, 0, 241, 20))
+        self.label_3.setGeometry(QtCore.QRect(0, 10, 371, 31))
         font = QtGui.QFont()
-        font.setPointSize(8)
+        font.setFamily("inter")
+        font.setPointSize(11)
         self.label_3.setFont(font)
+        self.label_3.setLayoutDirection(QtCore.Qt.LeftToRight)
+        self.label_3.setStyleSheet("QLabel {\n"
+"        font-family: \"inter\";\n"
+"}")
+        self.label_3.setAlignment(QtCore.Qt.AlignCenter)
         self.label_3.setObjectName("label_3")
-        self.info_1 = QtWidgets.QLabel(self.widget_6)
-        self.info_1.setGeometry(QtCore.QRect(0, 30, 371, 36))
-        self.info_1.setObjectName("info_1")
-        self.info_2 = QtWidgets.QLabel(self.widget_6)
-        self.info_2.setGeometry(QtCore.QRect(0, 70, 371, 35))
-        self.info_2.setScaledContents(False)
-        self.info_2.setWordWrap(True)
-        self.info_2.setOpenExternalLinks(False)
-        self.info_2.setObjectName("info_2")
-        self.info_3 = QtWidgets.QLabel(self.widget_6)
-        self.info_3.setGeometry(QtCore.QRect(0, 120, 371, 35))
+        self.saveDataButton = QtWidgets.QPushButton(self.widget_6)
+        self.saveDataButton.setEnabled(False)
+        self.saveDataButton.setGeometry(QtCore.QRect(40, 770, 301, 51))
+        font = QtGui.QFont()
+        font.setFamily("inter")
+        font.setPointSize(11)
+        self.saveDataButton.setFont(font)
+        self.saveDataButton.setStyleSheet("QPushButton:enabled {\n"
+"    background-color: #7576D6;\n"
+"    color: #FFFFFF;\n"
+"    border: none;\n"
+"    border-radius: 5px;\n"
+"    font-family: \"inter\";\n"
+"\n"
+"}\n"
+"\n"
+"QPushButton:disabled {\n"
+"    background-color: #a1a2d8;\n"
+"    color: #FFFFFF;\n"
+"    border: none;\n"
+"    border-radius: 5px;\n"
+"    font-family: \"inter\";\n"
+"\n"
+"}\n"
+"QPushButton:hover {\n"
+"    background-color:  #8e8fd7;\n"
+"}\n"
+"QPushButton:pressed {\n"
+"    background-color:  #58599e;\n"
+"}\n"
+"")
+        self.saveDataButton.setObjectName("saveDataButton")
+        self.verticalLayoutWidget = QtWidgets.QWidget(self.widget_6)
+        self.verticalLayoutWidget.setGeometry(QtCore.QRect(0, 60, 371, 251))
+        self.verticalLayoutWidget.setObjectName("verticalLayoutWidget")
+        self.verticalLayout = QtWidgets.QVBoxLayout(self.verticalLayoutWidget)
+        self.verticalLayout.setContentsMargins(0, 0, 0, 0)
+        self.verticalLayout.setObjectName("verticalLayout")
+        self.info_3 = QtWidgets.QLabel(self.verticalLayoutWidget)
+        font = QtGui.QFont()
+        font.setFamily("inter")
+        font.setPointSize(10)
+        self.info_3.setFont(font)
+        self.info_3.setStyleSheet("QLabel {\n"
+"        font-family: \"inter\";\n"
+"}")
         self.info_3.setScaledContents(False)
         self.info_3.setWordWrap(True)
         self.info_3.setOpenExternalLinks(False)
         self.info_3.setObjectName("info_3")
-        self.info_4 = QtWidgets.QLabel(self.widget_6)
-        self.info_4.setGeometry(QtCore.QRect(0, 170, 371, 71))
+        self.verticalLayout.addWidget(self.info_3)
+        self.info_4 = QtWidgets.QLabel(self.verticalLayoutWidget)
+        font = QtGui.QFont()
+        font.setFamily("inter")
+        font.setPointSize(10)
+        self.info_4.setFont(font)
+        self.info_4.setStyleSheet("QLabel {\n"
+"        font-family: \"inter\";\n"
+"}")
         self.info_4.setScaledContents(False)
         self.info_4.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignTop)
         self.info_4.setWordWrap(True)
         self.info_4.setOpenExternalLinks(False)
         self.info_4.setObjectName("info_4")
-        self.saveDataButton = QtWidgets.QPushButton(self.widget_6)
-        self.saveDataButton.setGeometry(QtCore.QRect(0, 240, 211, 28))
-        self.saveDataButton.setObjectName("saveDataButton")
+        self.verticalLayout.addWidget(self.info_4)
+        self.info_2 = QtWidgets.QLabel(self.verticalLayoutWidget)
+        font = QtGui.QFont()
+        font.setFamily("inter")
+        font.setPointSize(10)
+        self.info_2.setFont(font)
+        self.info_2.setStyleSheet("QLabel {\n"
+"        font-family: \"inter\";\n"
+"}")
+        self.info_2.setScaledContents(False)
+        self.info_2.setWordWrap(True)
+        self.info_2.setOpenExternalLinks(False)
+        self.info_2.setObjectName("info_2")
+        self.verticalLayout.addWidget(self.info_2)
+        self.info_1 = QtWidgets.QLabel(self.verticalLayoutWidget)
+        font = QtGui.QFont()
+        font.setFamily("inter")
+        font.setPointSize(10)
+        self.info_1.setFont(font)
+        self.info_1.setStyleSheet("QLabel {\n"
+"        font-family: \"inter\";\n"
+"}")
+        self.info_1.setObjectName("info_1")
+        self.verticalLayout.addWidget(self.info_1)
         self.line = QtWidgets.QFrame(self.page_1)
-        self.line.setGeometry(QtCore.QRect(400, 10, 31, 741))
+        self.line.setGeometry(QtCore.QRect(400, 10, 31, 841))
         self.line.setFrameShape(QtWidgets.QFrame.VLine)
         self.line.setFrameShadow(QtWidgets.QFrame.Sunken)
         self.line.setObjectName("line")
         self.line_2 = QtWidgets.QFrame(self.page_1)
-        self.line_2.setGeometry(QtCore.QRect(1090, 10, 31, 751))
+        self.line_2.setGeometry(QtCore.QRect(1090, 10, 31, 841))
         self.line_2.setFrameShape(QtWidgets.QFrame.VLine)
         self.line_2.setFrameShadow(QtWidgets.QFrame.Sunken)
         self.line_2.setObjectName("line_2")
         self.line_3 = QtWidgets.QFrame(self.page_1)
-        self.line_3.setGeometry(QtCore.QRect(10, 380, 391, 21))
+        self.line_3.setGeometry(QtCore.QRect(10, 410, 391, 21))
         self.line_3.setFrameShape(QtWidgets.QFrame.HLine)
         self.line_3.setFrameShadow(QtWidgets.QFrame.Sunken)
         self.line_3.setObjectName("line_3")
         self.screensWidget.addWidget(self.page_1)
         MainWindow.setCentralWidget(self.centralwidget)
-        self.menubar = QtWidgets.QMenuBar(MainWindow)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 1500, 27))
-        self.menubar.setObjectName("menubar")
-        MainWindow.setMenuBar(self.menubar)
-        self.statusbar = QtWidgets.QStatusBar(MainWindow)
-        self.statusbar.setObjectName("statusbar")
-        MainWindow.setStatusBar(self.statusbar)
 
         self.retranslateUi(MainWindow)
         self.screensWidget.setCurrentIndex(1)
@@ -337,14 +570,18 @@ class Ui_MainWindow(object):
         MainWindow.setWindowTitle(_translate("MainWindow", "Анализатор опытов электрофореза и вестерн-блота"))
         self.label_5.setText(_translate("MainWindow", "Выполняется загрузка моделей. Подождите..."))
         self.current_loading_model.setText(_translate("MainWindow", "Пусто"))
-        self.label_6.setText(_translate("MainWindow", "Загрузите снимок вестерн-блота"))
-        self.loadWesternBlotImageButton.setText(_translate("MainWindow", "Загрузить Изображение"))
-        self.westernBlotImageName.setText(_translate("MainWindow", "Не загружено"))
+        self.westernBlotImageName.setText(_translate("MainWindow", "Снимок не загружен"))
+        self.openOutputWesternBlotButton.setText(_translate("MainWindow", "Открыть\n"
+"Полностью"))
         self.westernBlotImage.setText(_translate("MainWindow", "Не загружено"))
-        self.loadElectrophoresisImageButton.setText(_translate("MainWindow", "Загрузить Изображение"))
-        self.electrophoresisImageName.setText(_translate("MainWindow", "Не загружено"))
-        self.label_7.setText(_translate("MainWindow", "Загрузите снимок электрофореза"))
+        self.label_6.setText(_translate("MainWindow", "Вестерн-блот"))
+        self.openOutputElectrophoresisButton.setText(_translate("MainWindow", "Открыть\n"
+"Полностью"))
+        self.electrophoresisImageName.setText(_translate("MainWindow", "Снимок не загружен"))
+        self.loadElectrophoresisImageButton.setText(_translate("MainWindow", "Загрузить\n"
+"Изображение"))
         self.electrophoresisImage.setText(_translate("MainWindow", "Не загружено"))
+        self.label_7.setText(_translate("MainWindow", "Электрофорез"))
         self.visualisationImage.setText(_translate("MainWindow", "Не загружено"))
         self.startLoadingButton.setText(_translate("MainWindow", "Начать обработку"))
         self.openOutputImageButton.setText(_translate("MainWindow", "Открыть полностью"))
@@ -352,9 +589,9 @@ class Ui_MainWindow(object):
         self.label_4.setText(_translate("MainWindow", "Отступ по ширине:"))
         self.label_8.setText(_translate("MainWindow", "Отступ по высоте:"))
         self.label_3.setText(_translate("MainWindow", "Информация"))
-        self.info_1.setText(_translate("MainWindow", "Распознанные области: нет"))
-        self.info_2.setText(_translate("MainWindow", "Распозннаные области на снимках электрофореза: нет"))
+        self.saveDataButton.setText(_translate("MainWindow", "Сохранить данные и снимок"))
         self.info_3.setText(_translate("MainWindow", "Распозннаные области на снимках вестерн-блота: нет"))
         self.info_4.setText(_translate("MainWindow", "Отношения количество белков вестерн-блота к электрофореза: нет"))
-        self.saveDataButton.setText(_translate("MainWindow", "Сохранить данные и снимок"))
+        self.info_2.setText(_translate("MainWindow", "Распозннаные области на снимках электрофореза: нет"))
+        self.info_1.setText(_translate("MainWindow", "Распознанные области: нет"))
 import images_rc

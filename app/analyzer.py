@@ -12,6 +12,7 @@ from app.tools import *
 
 
 class Analyzer:
+    CLASES = "Одиночный белок", "Группа белков"
 
     def __init__(self, model1=None, model2=None):
         self.labels_map = [""]
@@ -19,6 +20,8 @@ class Analyzer:
         self.western_blot_model = model2
         self.western_blot_image = None
         self.electrophoresis_image = None
+        self.western_blot_image_resized = None
+        self.electrophoresis_image_resized = None
         self.electrophoresis_image_tensor = None
         self.western_blot_image_tensor = None
 
@@ -31,8 +34,9 @@ class Analyzer:
             self.labels_map.append(name)
 
     def load_images(self, electrophoresis_image_path, western_blot_image_path):
-        self.electrophoresis_image = convert_to_np(electrophoresis_image_path)
-        self.western_blot_image = convert_to_np(western_blot_image_path)
+        self.electrophoresis_image = load_image_as_np(electrophoresis_image_path)
+        self.western_blot_image = load_image_as_np(western_blot_image_path)
+
         self.electrophoresis_image_tensor = tf.convert_to_tensor(np.expand_dims(self.electrophoresis_image, 0),
                                                                  dtype=tf.uint8)
         self.western_blot_image_tensor = tf.convert_to_tensor(np.expand_dims(self.western_blot_image, 0),
@@ -53,36 +57,29 @@ class Analyzer:
         h_e, w_e, _ = self.electrophoresis_image.shape
         for i in range(self.electrophoresis_model.classes.shape[1]):
             electrophoresis_proteins_class = self.electrophoresis_model.classes[0][i]
-            e_y1_hint, e_x1_hint, e_y2_hint, e_x2_hint = self.electrophoresis_model.boxes[0][i]
+            e_y1, e_x1, e_y2, e_x2 = self.electrophoresis_model.boxes[0][i]
             electrophoresis_proteins_score = self.electrophoresis_model.scores[0][i]
-            if electrophoresis_proteins_score > .30:
-                e_x1 = int(e_x1_hint * w_e)
-                e_y1 = int(e_y1_hint * h_e)
-                e_x2 = int(e_x2_hint * w_e)
-                e_y2 = int(e_y2_hint * h_e)
                 # intersections = self.find_intersection((w_x1, w_y1, w_x2, w_y2), (e_x1, e_y1, e_x2, e_y2))
                 # if intersections is not None:
-                if electrophoresis_proteins_score >= trigger_threshold:
-                    e_boxes.append((e_x1, e_y1, e_x2, e_y2))
-                    e_classes.append(self.labels_map[electrophoresis_proteins_class])
-                    e_scores.append(electrophoresis_proteins_score.item())  # convert float32 to float
-                    btypes.append(ELECTROPHORESIS_TYPE)
+            if electrophoresis_proteins_score >= trigger_threshold:
+                e_boxes.append((float(e_x1), float(e_y1), float(e_x2), float(e_y2)))
+                e_classes.append(self.CLASES[int(electrophoresis_proteins_class) - 1])
+                e_scores.append(float(electrophoresis_proteins_score))  # convert float32 to float
+                btypes.append(ELECTROPHORESIS_TYPE)
         for j in range(len(self.western_blot_model.classes[0])):
             western_blot_proteins_class = self.western_blot_model.classes[0][j]
-            w_y1_hint, w_x1_hint, w_y2_hint, w_x2_hint = self.western_blot_model.boxes[0][j]
+            w_y1, w_x1, w_y2, w_x2 = self.western_blot_model.boxes[0][j]
             western_blot_proteins_score = self.western_blot_model.scores[0][j]
-            if western_blot_proteins_score > .30:
-                w_x1 = int(w_x1_hint * w_e)
-                w_y1 = int(w_y1_hint * h_e)
-                w_x2 = int(w_x2_hint * w_e)
-                w_y2 = int(w_y2_hint * h_e)
+
+
                 # intersections = self.find_intersection((w_x1, w_y1, w_x2, w_y2), (e_x1, e_y1, e_x2, e_y2))
                 # if intersections is not None:
-                if western_blot_proteins_score >= trigger_threshold:
-                    w_boxes.append((w_x1, w_y1, w_x2, w_y2))
-                    w_classes.append(self.labels_map[western_blot_proteins_class])
-                    w_scores.append(western_blot_proteins_score.item())  # convert float32 to float
-                    btypes.append(WESTERN_BLOT_TYPE)
+            if western_blot_proteins_score >= trigger_threshold:
+
+                w_boxes.append((float(w_x1), float(w_y1), float(w_x2), float(w_y2)))
+                w_classes.append(self.CLASES[int(western_blot_proteins_class) - 1])
+                w_scores.append(float(western_blot_proteins_score))  # convert float32 to float
+                btypes.append(WESTERN_BLOT_TYPE)
         return e_boxes, e_classes, e_scores, w_boxes, w_classes, w_scores, btypes
 
     def analyze(self, trigger_threshold=.5, x_offset_hint=0, y_offset_hint=0):
@@ -95,13 +92,14 @@ class Analyzer:
         for i in range(len(self.electrophoresis_model.classes[0])):
             electrophoresis_proteins_class = self.electrophoresis_model.classes[0][i]
             electrophoresis_proteins_box = self.electrophoresis_model.boxes[0][i]
+
             electrophoresis_proteins_score = self.electrophoresis_model.scores[0][i]
             e_y1, e_x1, e_y2, e_x2 = electrophoresis_proteins_box
             if electrophoresis_proteins_score >= trigger_threshold:
-                boxes.append((e_x1, e_y1, e_x2, e_y2))
-                classes.append(electrophoresis_proteins_class)
+                boxes.append((float(e_x1), float(e_y1), float(e_x2), float(e_y2)))
+                classes.append(self.CLASES[int(electrophoresis_proteins_class) - 1])
 
-                scores.append(electrophoresis_proteins_score.item())  # convert float32 to float
+                scores.append(float(electrophoresis_proteins_score))  # convert float32 to float
                 btypes.append(ELECTROPHORESIS_TYPE)
                 for j in range(len(self.western_blot_model.classes[0])):
                     western_blot_proteins_class = self.western_blot_model.classes[0][j]
@@ -110,46 +108,47 @@ class Analyzer:
 
                     w_y1, w_x1, w_y2, w_x2 = western_blot_proteins_box
                     if western_blot_proteins_score > trigger_threshold:
-                        boxes.append((w_x1, w_y1, w_x2, w_y2))
-                        classes.append(western_blot_proteins_class)
-                        scores.append(western_blot_proteins_score.item())  # convert float32 to float
+                        boxes.append((float(w_x1), float(w_y1), float(w_x2), float(w_y2)))
+                        classes.append(self.CLASES[int(western_blot_proteins_class) - 1])
+                        scores.append(float(western_blot_proteins_score))  # convert float32 to float
                         btypes.append(WESTERN_BLOT_TYPE)
 
-                        intersections = find_intersection((e_x1, e_y1, e_x2, e_y2),
-                                                          (w_x1 + x_offset_hint,
-                                                           w_y1 + y_offset_hint,
-                                                           w_x2 + x_offset_hint,
-                                                           w_y2 + y_offset_hint
+                        intersections = find_intersection((float(e_x1), float(e_y1), float(e_x2), float(e_y2)),
+                                                          (float(w_x1) + x_offset_hint,
+                                                           float(w_y1) + y_offset_hint,
+                                                           float(w_x2) + x_offset_hint,
+                                                           float(w_y2) + y_offset_hint
                                                            ))
                         if intersections is not None:
                             boxes.append(intersections)
-                            classes.append(2)  # proteins
-                            score = (electrophoresis_proteins_score.item() + western_blot_proteins_score.item()) / 2
-                            scores.append(score)  # convert float32 to float
+                            classes.append(self.CLASES[1])  # proteins
+                            score = (np.clip(float(electrophoresis_proteins_score) + float(western_blot_proteins_score),
+                                             0, 1)) / 2
+                            scores.append(float(score))  # convert float32 to float
                             btypes.append(PROTEIN_TYPE)
         return boxes, classes, scores, btypes
         # print(len(self.electrophoresis_model.classes[0]))
         # print(len(self.electrophoresis_model.boxes[0]))
 
-    def visualize(self, boxes, classes, scores, btypes, image, x_offset_hint=0, y_offset_hint=0,
+    def visualize(self, boxes, classes, scores, btypes, image_np, x_offset_hint=0, y_offset_hint=0,
                   viz_allow=[PROTEIN_TYPE]):
-        image_np = np.array(image)
+
         height, width, _ = image_np.shape
         h, w, __ = self.western_blot_image.shape
         for c, s, b, t in zip(classes, scores, boxes, btypes):
             x1, y1, x2, y2 = b
             border_color = 0, 0, 255
 
-            border_radius = round(width * height * .000_0006)  # % от площади
+            border_radius = round(width * height * .000_0002)  # % от площади
             if border_radius == 0:
                 border_radius = 1
 
-            font_size = round(width * height * .000_00001)
+            font_size = round(width * height * .000_00007)
 
             if t not in viz_allow:
                 continue
             if t == ELECTROPHORESIS_TYPE and ELECTROPHORESIS_TYPE in viz_allow:
-                border_color = 100, 255, 100
+                border_color = 255, 100, 100
                 x1 = int(x1 * width)
                 x2 = int(x2 * width)
                 y1 = int(y1 * height)
@@ -163,16 +162,16 @@ class Analyzer:
                 y2 = int((y2 + y_offset_hint) * height)
 
             if t == PROTEIN_TYPE and PROTEIN_TYPE in viz_allow:
-                border_color = 255, 100, 100
+                border_color = 100, 255, 100
 
                 x1 = int(x1 * width)
                 x2 = int(x2 * width)
                 y1 = int(y1 * height)
                 y2 = int(y2 * height)
             cv2.rectangle(image_np, (x1, y1), (x2, y2), border_color, border_radius)
-            label = f"Class: {c}, Score: {s:.2f}"
-            cv2.putText(image_np, label, (x1, y1 - 10),
-                        cv2.FONT_HERSHEY_SIMPLEX, font_size, border_color, int(border_radius))
+            label = f"Белок"
+            # cv2.putText(image_np, label, (x1, y1 - 10),
+            #             cv2.FONT_HERSHEY_COMPLEX, font_size, border_color, int(border_radius))
         return image_np
 
 

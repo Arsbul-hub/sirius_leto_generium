@@ -2,16 +2,28 @@
 <ui version="4.0">
  <class>MainWindow</class>
  <widget class="QMainWindow" name="MainWindow">
+  <property name="enabled">
+   <bool>true</bool>
+  </property>
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
     <width>1500</width>
-    <height>821</height>
+    <height>876</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Анализатор опытов электрофореза и вестерн-блота</string>
+  </property>
+  <property name="statusTip">
+   <string/>
+  </property>
+  <property name="styleSheet">
+   <string notr="true"/>
+  </property>
+  <property name="tabShape">
+   <enum>QTabWidget::Rounded</enum>
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QStackedWidget" name="screensWidget">
@@ -20,7 +32,7 @@
       <x>0</x>
       <y>0</y>
       <width>1491</width>
-      <height>780</height>
+      <height>851</height>
      </rect>
     </property>
     <property name="currentIndex">
@@ -31,7 +43,7 @@
       <property name="geometry">
        <rect>
         <x>0</x>
-        <y>280</y>
+        <y>340</y>
         <width>1491</width>
         <height>131</height>
        </rect>
@@ -94,7 +106,7 @@
       <property name="geometry">
        <rect>
         <x>10</x>
-        <y>650</y>
+        <y>760</y>
         <width>1481</width>
         <height>111</height>
        </rect>
@@ -121,71 +133,46 @@ background-position: center;
       <property name="geometry">
        <rect>
         <x>10</x>
-        <y>400</y>
+        <y>433</y>
         <width>391</width>
-        <height>361</height>
+        <height>421</height>
        </rect>
       </property>
       <widget class="QWidget" name="widget_4" native="true">
        <property name="geometry">
         <rect>
          <x>0</x>
-         <y>260</y>
+         <y>250</y>
          <width>391</width>
-         <height>111</height>
+         <height>171</height>
         </rect>
        </property>
-       <widget class="QLabel" name="label_6">
-        <property name="geometry">
-         <rect>
-          <x>70</x>
-          <y>0</y>
-          <width>251</width>
-          <height>31</height>
-         </rect>
-        </property>
-        <property name="font">
-         <font>
-          <pointsize>9</pointsize>
-         </font>
-        </property>
-        <property name="layoutDirection">
-         <enum>Qt::LeftToRight</enum>
-        </property>
-        <property name="text">
-         <string>Загрузите снимок вестерн-блота</string>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignCenter</set>
-        </property>
-       </widget>
-       <widget class="QPushButton" name="loadWesternBlotImageButton">
+       <widget class="QLabel" name="westernBlotImageName">
         <property name="enabled">
          <bool>true</bool>
         </property>
         <property name="geometry">
          <rect>
-          <x>110</x>
-          <y>40</y>
-          <width>171</width>
+          <x>5</x>
+          <y>130</y>
+          <width>381</width>
           <height>31</height>
          </rect>
         </property>
-        <property name="text">
-         <string>Загрузить Изображение</string>
+        <property name="font">
+         <font>
+          <family>inter</family>
+          <pointsize>10</pointsize>
+         </font>
         </property>
-       </widget>
-       <widget class="QLabel" name="westernBlotImageName">
-        <property name="geometry">
-         <rect>
-          <x>80</x>
-          <y>80</y>
-          <width>231</width>
-          <height>20</height>
-         </rect>
+        <property name="styleSheet">
+         <string notr="true">QLabel {
+		font-family: &quot;inter&quot;;
+
+}</string>
         </property>
         <property name="text">
-         <string>Не загружено</string>
+         <string>Снимок не загружен</string>
         </property>
         <property name="alignment">
          <set>Qt::AlignCenter</set>
@@ -194,26 +181,163 @@ background-position: center;
          <bool>true</bool>
         </property>
        </widget>
+       <widget class="QPushButton" name="openOutputWesternBlotButton">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>50</y>
+          <width>170</width>
+          <height>50</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <family>inter</family>
+          <pointsize>10</pointsize>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QPushButton:enabled {
+	background-color: #7576D6;
+	color: #FFFFFF;
+	border: none;
+	border-radius: 5px;
+	font-family: &quot;inter&quot;;
+
+}
+
+QPushButton:disabled {
+	background-color: #a1a2d8;
+	color: #FFFFFF;
+	border: none;
+	border-radius: 5px;
+	font-family: &quot;inter&quot;;
+
+}
+QPushButton:hover {
+    background-color:  #8e8fd7;
+}
+QPushButton:pressed {
+    background-color:  #58599e;
+}
+</string>
+        </property>
+        <property name="text">
+         <string>Открыть
+Полностью</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="loadWesternBlotImageButton">
+        <property name="enabled">
+         <bool>true</bool>
+        </property>
+        <property name="geometry">
+         <rect>
+          <x>200</x>
+          <y>50</y>
+          <width>171</width>
+          <height>51</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <family>inter</family>
+          <pointsize>10</pointsize>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QPushButton:enabled {
+	background-color: #7576D6;
+	color: #FFFFFF;
+	border: none;
+	border-radius: 5px;
+	font-family: &quot;inter&quot;;
+
+}
+
+QPushButton:disabled {
+	background-color: #a1a2d8;
+	color: #FFFFFF;
+	border: none;
+	border-radius: 5px;
+	font-family: &quot;inter&quot;;
+
+}
+QPushButton:hover {
+    background-color:  #8e8fd7;
+}
+QPushButton:pressed {
+    background-color:  #58599e;
+}
+</string>
+        </property>
+        <property name="inputMethodHints">
+         <set>Qt::ImhNone</set>
+        </property>
+        <property name="text">
+         <string notr="true">Загрузить
+Изображение</string>
+        </property>
+       </widget>
       </widget>
       <widget class="QLabel" name="westernBlotImage">
        <property name="geometry">
         <rect>
-         <x>0</x>
-         <y>10</y>
-         <width>391</width>
-         <height>241</height>
+         <x>20</x>
+         <y>50</y>
+         <width>350</width>
+         <height>230</height>
         </rect>
        </property>
        <property name="font">
         <font>
+         <family>inter</family>
          <pointsize>8</pointsize>
         </font>
        </property>
        <property name="styleSheet">
-        <string notr="true">border: 1px solid gray;</string>
+        <string notr="true">
+QLabel {
+		font-family: &quot;inter&quot;;
+		border: 1px solid gray;
+}</string>
        </property>
        <property name="text">
         <string>Не загружено</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_6">
+       <property name="geometry">
+        <rect>
+         <x>70</x>
+         <y>10</y>
+         <width>251</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <family>inter</family>
+         <pointsize>11</pointsize>
+        </font>
+       </property>
+       <property name="layoutDirection">
+        <enum>Qt::LeftToRight</enum>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QLabel {
+		font-family: &quot;inter&quot;;
+
+}</string>
+       </property>
+       <property name="text">
+        <string>Вестерн-блот</string>
        </property>
        <property name="alignment">
         <set>Qt::AlignCenter</set>
@@ -226,7 +350,7 @@ background-position: center;
         <x>10</x>
         <y>10</y>
         <width>391</width>
-        <height>371</height>
+        <height>401</height>
        </rect>
       </property>
       <widget class="QWidget" name="widget_5" native="true">
@@ -235,33 +359,80 @@ background-position: center;
          <x>0</x>
          <y>240</y>
          <width>391</width>
-         <height>121</height>
+         <height>161</height>
         </rect>
        </property>
-       <widget class="QPushButton" name="loadElectrophoresisImageButton">
+       <widget class="QPushButton" name="openOutputElectrophoresisButton">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
         <property name="geometry">
          <rect>
-          <x>110</x>
+          <x>20</x>
           <y>50</y>
-          <width>171</width>
-          <height>31</height>
+          <width>170</width>
+          <height>50</height>
          </rect>
         </property>
+        <property name="font">
+         <font>
+          <family>inter</family>
+          <pointsize>10</pointsize>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QPushButton:enabled {
+	background-color: #7576D6;
+	color: #FFFFFF;
+	border: none;
+	border-radius: 5px;
+	font-family: &quot;inter&quot;;
+
+}
+
+QPushButton:disabled {
+	background-color: #a1a2d8;
+	color: #FFFFFF;
+	border: none;
+	border-radius: 5px;
+	font-family: &quot;inter&quot;;
+
+}
+QPushButton:hover {
+    background-color:  #8e8fd7;
+}
+QPushButton:pressed {
+    background-color:  #58599e;
+}
+</string>
+        </property>
         <property name="text">
-         <string>Загрузить Изображение</string>
+         <string>Открыть
+Полностью</string>
         </property>
        </widget>
        <widget class="QLabel" name="electrophoresisImageName">
         <property name="geometry">
          <rect>
-          <x>80</x>
-          <y>90</y>
-          <width>231</width>
-          <height>20</height>
+          <x>5</x>
+          <y>120</y>
+          <width>381</width>
+          <height>31</height>
          </rect>
         </property>
+        <property name="font">
+         <font>
+          <family>inter</family>
+          <pointsize>10</pointsize>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QLabel {
+		font-family: &quot;inter&quot;;
+}</string>
+        </property>
         <property name="text">
-         <string>Не загружено</string>
+         <string>Снимок не загружен</string>
         </property>
         <property name="alignment">
          <set>Qt::AlignCenter</set>
@@ -270,50 +441,107 @@ background-position: center;
          <bool>true</bool>
         </property>
        </widget>
-       <widget class="QLabel" name="label_7">
+       <widget class="QPushButton" name="loadElectrophoresisImageButton">
         <property name="geometry">
          <rect>
-          <x>70</x>
-          <y>10</y>
-          <width>251</width>
-          <height>31</height>
+          <x>200</x>
+          <y>50</y>
+          <width>170</width>
+          <height>50</height>
          </rect>
         </property>
         <property name="font">
          <font>
-          <pointsize>9</pointsize>
+          <family>inter</family>
+          <pointsize>10</pointsize>
          </font>
         </property>
-        <property name="layoutDirection">
-         <enum>Qt::LeftToRight</enum>
+        <property name="styleSheet">
+         <string notr="true">QPushButton:enabled {
+	background-color: #7576D6;
+	color: #FFFFFF;
+	border: none;
+	border-radius: 5px;
+	font-family: &quot;inter&quot;;
+
+}
+
+QPushButton:disabled {
+	background-color: #a1a2d8;
+	color: #FFFFFF;
+	border: none;
+	border-radius: 5px;
+	font-family: &quot;inter&quot;;
+
+}
+QPushButton:hover {
+    background-color:  #8e8fd7;
+}
+QPushButton:pressed {
+    background-color:  #58599e;
+}
+</string>
         </property>
         <property name="text">
-         <string>Загрузите снимок электрофореза</string>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignCenter</set>
+         <string>Загрузить
+Изображение</string>
         </property>
        </widget>
       </widget>
       <widget class="QLabel" name="electrophoresisImage">
        <property name="geometry">
         <rect>
-         <x>0</x>
-         <y>0</y>
-         <width>391</width>
-         <height>241</height>
+         <x>20</x>
+         <y>40</y>
+         <width>350</width>
+         <height>230</height>
         </rect>
        </property>
        <property name="font">
         <font>
+         <family>inter</family>
          <pointsize>8</pointsize>
         </font>
        </property>
        <property name="styleSheet">
-        <string notr="true">border: 1px solid gray;</string>
+        <string notr="true">
+QLabel {
+		font-family: &quot;inter&quot;;
+		border: 1px solid gray;
+}</string>
        </property>
        <property name="text">
         <string>Не загружено</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_7">
+       <property name="geometry">
+        <rect>
+         <x>70</x>
+         <y>0</y>
+         <width>251</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <family>inter</family>
+         <pointsize>11</pointsize>
+        </font>
+       </property>
+       <property name="layoutDirection">
+        <enum>Qt::LeftToRight</enum>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QLabel {
+		font-family: &quot;inter&quot;;
+}</string>
+       </property>
+       <property name="text">
+        <string>Электрофорез</string>
        </property>
        <property name="alignment">
         <set>Qt::AlignCenter</set>
@@ -326,25 +554,30 @@ background-position: center;
         <x>429</x>
         <y>10</y>
         <width>661</width>
-        <height>751</height>
+        <height>841</height>
        </rect>
       </property>
       <widget class="QLabel" name="visualisationImage">
        <property name="geometry">
         <rect>
-         <x>0</x>
+         <x>10</x>
          <y>0</y>
-         <width>661</width>
+         <width>641</width>
          <height>461</height>
         </rect>
        </property>
        <property name="font">
         <font>
+         <family>inter</family>
          <pointsize>9</pointsize>
         </font>
        </property>
        <property name="styleSheet">
-        <string notr="true">border: 1px solid gray;</string>
+        <string notr="true">
+QLabel {
+		font-family: &quot;inter&quot;;
+		border: 1px solid gray;
+}</string>
        </property>
        <property name="text">
         <string>Не загружено</string>
@@ -359,10 +592,10 @@ background-position: center;
        </property>
        <property name="geometry">
         <rect>
-         <x>0</x>
+         <x>10</x>
          <y>470</y>
-         <width>661</width>
-         <height>281</height>
+         <width>641</width>
+         <height>371</height>
         </rect>
        </property>
        <widget class="QPushButton" name="startLoadingButton">
@@ -371,11 +604,17 @@ background-position: center;
         </property>
         <property name="geometry">
          <rect>
-          <x>10</x>
+          <x>0</x>
           <y>10</y>
           <width>241</width>
           <height>51</height>
          </rect>
+        </property>
+        <property name="font">
+         <font>
+          <family>inter</family>
+          <pointsize>11</pointsize>
+         </font>
         </property>
         <property name="styleSheet">
          <string notr="true">QPushButton:enabled {
@@ -384,7 +623,7 @@ background-position: center;
 	border: none;
 	border-radius: 5px;
 	font-family: &quot;inter&quot;;
-	font-size: 18px;
+
 }
 
 QPushButton:disabled {
@@ -393,7 +632,7 @@ QPushButton:disabled {
 	border: none;
 	border-radius: 5px;
 	font-family: &quot;inter&quot;;
-	font-size: 18px;
+
 }
 QPushButton:hover {
     background-color:  #8e8fd7;
@@ -410,8 +649,8 @@ QPushButton:pressed {
        <widget class="QSpinBox" name="marginHorizontalSliderValue">
         <property name="geometry">
          <rect>
-          <x>610</x>
-          <y>250</y>
+          <x>600</x>
+          <y>330</y>
           <width>42</width>
           <height>22</height>
          </rect>
@@ -429,8 +668,8 @@ QPushButton:pressed {
        <widget class="QSlider" name="marginVerticalSlider">
         <property name="geometry">
          <rect>
-          <x>10</x>
-          <y>250</y>
+          <x>0</x>
+          <y>330</y>
           <width>591</width>
           <height>22</height>
          </rect>
@@ -460,7 +699,7 @@ QPushButton:pressed {
         </property>
         <property name="geometry">
          <rect>
-          <x>410</x>
+          <x>400</x>
           <y>10</y>
           <width>241</width>
           <height>51</height>
@@ -469,7 +708,7 @@ QPushButton:pressed {
         <property name="font">
          <font>
           <family>inter</family>
-          <pointsize>-1</pointsize>
+          <pointsize>11</pointsize>
          </font>
         </property>
         <property name="styleSheet">
@@ -479,7 +718,7 @@ QPushButton:pressed {
 	border: none;
 	border-radius: 5px;
 	font-family: &quot;inter&quot;;
-	font-size: 18px;
+
 }
 
 QPushButton:disabled {
@@ -488,7 +727,7 @@ QPushButton:disabled {
 	border: none;
 	border-radius: 5px;
 	font-family: &quot;inter&quot;;
-	font-size: 18px;
+
 }
 QPushButton:hover {
     background-color:  #8e8fd7;
@@ -505,8 +744,8 @@ QPushButton:pressed {
        <widget class="QSlider" name="marginHorizontalSlider">
         <property name="geometry">
          <rect>
-          <x>10</x>
-          <y>190</y>
+          <x>0</x>
+          <y>240</y>
           <width>591</width>
           <height>22</height>
          </rect>
@@ -539,8 +778,8 @@ QPushButton:pressed {
        <widget class="QSpinBox" name="marginVerticalSliderValue">
         <property name="geometry">
          <rect>
-          <x>610</x>
-          <y>190</y>
+          <x>600</x>
+          <y>240</y>
           <width>42</width>
           <height>22</height>
          </rect>
@@ -555,8 +794,8 @@ QPushButton:pressed {
        <widget class="QLabel" name="label">
         <property name="geometry">
          <rect>
-          <x>10</x>
-          <y>110</y>
+          <x>0</x>
+          <y>130</y>
           <width>641</width>
           <height>31</height>
          </rect>
@@ -584,9 +823,9 @@ font-weight: &quot;normal&quot;;</string>
        <widget class="QLabel" name="analyzeStatus">
         <property name="geometry">
          <rect>
-          <x>150</x>
+          <x>0</x>
           <y>80</y>
-          <width>371</width>
+          <width>641</width>
           <height>31</height>
          </rect>
         </property>
@@ -603,8 +842,8 @@ font-weight: &quot;normal&quot;;</string>
        <widget class="QLabel" name="label_4">
         <property name="geometry">
          <rect>
-          <x>240</x>
-          <y>160</y>
+          <x>230</x>
+          <y>200</y>
           <width>191</width>
           <height>21</height>
          </rect>
@@ -632,8 +871,8 @@ font-weight: &quot;normal&quot;;</string>
        <widget class="QLabel" name="label_8">
         <property name="geometry">
          <rect>
-          <x>240</x>
-          <y>220</y>
+          <x>230</x>
+          <y>290</y>
           <width>191</width>
           <height>21</height>
          </rect>
@@ -666,121 +905,200 @@ font-weight: &quot;normal&quot;;</string>
         <x>1120</x>
         <y>10</y>
         <width>371</width>
-        <height>751</height>
+        <height>841</height>
        </rect>
       </property>
       <widget class="QLabel" name="label_3">
        <property name="geometry">
         <rect>
          <x>0</x>
-         <y>0</y>
-         <width>241</width>
-         <height>20</height>
+         <y>10</y>
+         <width>371</width>
+         <height>31</height>
         </rect>
        </property>
        <property name="font">
         <font>
-         <pointsize>8</pointsize>
+         <family>inter</family>
+         <pointsize>11</pointsize>
         </font>
+       </property>
+       <property name="layoutDirection">
+        <enum>Qt::LeftToRight</enum>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QLabel {
+		font-family: &quot;inter&quot;;
+}</string>
        </property>
        <property name="text">
         <string>Информация</string>
        </property>
-      </widget>
-      <widget class="QLabel" name="info_1">
-       <property name="geometry">
-        <rect>
-         <x>0</x>
-         <y>30</y>
-         <width>371</width>
-         <height>36</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>Распознанные области: нет</string>
-       </property>
-      </widget>
-      <widget class="QLabel" name="info_2">
-       <property name="geometry">
-        <rect>
-         <x>0</x>
-         <y>70</y>
-         <width>371</width>
-         <height>35</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>Распозннаные области на снимках электрофореза: нет</string>
-       </property>
-       <property name="scaledContents">
-        <bool>false</bool>
-       </property>
-       <property name="wordWrap">
-        <bool>true</bool>
-       </property>
-       <property name="openExternalLinks">
-        <bool>false</bool>
-       </property>
-      </widget>
-      <widget class="QLabel" name="info_3">
-       <property name="geometry">
-        <rect>
-         <x>0</x>
-         <y>120</y>
-         <width>371</width>
-         <height>35</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>Распозннаные области на снимках вестерн-блота: нет</string>
-       </property>
-       <property name="scaledContents">
-        <bool>false</bool>
-       </property>
-       <property name="wordWrap">
-        <bool>true</bool>
-       </property>
-       <property name="openExternalLinks">
-        <bool>false</bool>
-       </property>
-      </widget>
-      <widget class="QLabel" name="info_4">
-       <property name="geometry">
-        <rect>
-         <x>0</x>
-         <y>170</y>
-         <width>371</width>
-         <height>71</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>Отношения количество белков вестерн-блота к электрофореза: нет</string>
-       </property>
-       <property name="scaledContents">
-        <bool>false</bool>
-       </property>
        <property name="alignment">
-        <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
-       </property>
-       <property name="wordWrap">
-        <bool>true</bool>
-       </property>
-       <property name="openExternalLinks">
-        <bool>false</bool>
+        <set>Qt::AlignCenter</set>
        </property>
       </widget>
       <widget class="QPushButton" name="saveDataButton">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
        <property name="geometry">
         <rect>
-         <x>0</x>
-         <y>240</y>
-         <width>211</width>
-         <height>28</height>
+         <x>40</x>
+         <y>770</y>
+         <width>301</width>
+         <height>51</height>
         </rect>
+       </property>
+       <property name="font">
+        <font>
+         <family>inter</family>
+         <pointsize>11</pointsize>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QPushButton:enabled {
+	background-color: #7576D6;
+	color: #FFFFFF;
+	border: none;
+	border-radius: 5px;
+	font-family: &quot;inter&quot;;
+
+}
+
+QPushButton:disabled {
+	background-color: #a1a2d8;
+	color: #FFFFFF;
+	border: none;
+	border-radius: 5px;
+	font-family: &quot;inter&quot;;
+
+}
+QPushButton:hover {
+    background-color:  #8e8fd7;
+}
+QPushButton:pressed {
+    background-color:  #58599e;
+}
+</string>
        </property>
        <property name="text">
         <string>Сохранить данные и снимок</string>
        </property>
+      </widget>
+      <widget class="QWidget" name="verticalLayoutWidget">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>60</y>
+         <width>371</width>
+         <height>251</height>
+        </rect>
+       </property>
+       <layout class="QVBoxLayout" name="verticalLayout">
+        <item>
+         <widget class="QLabel" name="info_3">
+          <property name="font">
+           <font>
+            <family>inter</family>
+            <pointsize>10</pointsize>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QLabel {
+		font-family: &quot;inter&quot;;
+}</string>
+          </property>
+          <property name="text">
+           <string>Распозннаные области на снимках вестерн-блота: нет</string>
+          </property>
+          <property name="scaledContents">
+           <bool>false</bool>
+          </property>
+          <property name="wordWrap">
+           <bool>true</bool>
+          </property>
+          <property name="openExternalLinks">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="info_4">
+          <property name="font">
+           <font>
+            <family>inter</family>
+            <pointsize>10</pointsize>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QLabel {
+		font-family: &quot;inter&quot;;
+}</string>
+          </property>
+          <property name="text">
+           <string>Отношения количество белков вестерн-блота к электрофореза: нет</string>
+          </property>
+          <property name="scaledContents">
+           <bool>false</bool>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+          </property>
+          <property name="wordWrap">
+           <bool>true</bool>
+          </property>
+          <property name="openExternalLinks">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="info_2">
+          <property name="font">
+           <font>
+            <family>inter</family>
+            <pointsize>10</pointsize>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QLabel {
+		font-family: &quot;inter&quot;;
+}</string>
+          </property>
+          <property name="text">
+           <string>Распозннаные области на снимках электрофореза: нет</string>
+          </property>
+          <property name="scaledContents">
+           <bool>false</bool>
+          </property>
+          <property name="wordWrap">
+           <bool>true</bool>
+          </property>
+          <property name="openExternalLinks">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="info_1">
+          <property name="font">
+           <font>
+            <family>inter</family>
+            <pointsize>10</pointsize>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QLabel {
+		font-family: &quot;inter&quot;;
+}</string>
+          </property>
+          <property name="text">
+           <string>Распознанные области: нет</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
       </widget>
      </widget>
      <widget class="Line" name="line">
@@ -789,7 +1107,7 @@ font-weight: &quot;normal&quot;;</string>
         <x>400</x>
         <y>10</y>
         <width>31</width>
-        <height>741</height>
+        <height>841</height>
        </rect>
       </property>
       <property name="orientation">
@@ -802,7 +1120,7 @@ font-weight: &quot;normal&quot;;</string>
         <x>1090</x>
         <y>10</y>
         <width>31</width>
-        <height>751</height>
+        <height>841</height>
        </rect>
       </property>
       <property name="orientation">
@@ -813,7 +1131,7 @@ font-weight: &quot;normal&quot;;</string>
       <property name="geometry">
        <rect>
         <x>10</x>
-        <y>380</y>
+        <y>410</y>
         <width>391</width>
         <height>21</height>
        </rect>
@@ -825,17 +1143,6 @@ font-weight: &quot;normal&quot;;</string>
     </widget>
    </widget>
   </widget>
-  <widget class="QMenuBar" name="menubar">
-   <property name="geometry">
-    <rect>
-     <x>0</x>
-     <y>0</y>
-     <width>1500</width>
-     <height>27</height>
-    </rect>
-   </property>
-  </widget>
-  <widget class="QStatusBar" name="statusbar"/>
  </widget>
  <resources>
   <include location="app/resources/images.qrc"/>
