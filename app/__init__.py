@@ -11,7 +11,7 @@ import numpy as np
 from PIL import Image
 from PyQt5 import QtWidgets
 from PyQt5.QtGui import QPixmap, QImage
-from PyQt5.QtWidgets import QFileDialog, QApplication, QMessageBox
+from PyQt5.QtWidgets import QFileDialog, QApplication, QMessageBox, QLabel
 
 from app import design
 
@@ -32,11 +32,17 @@ class App(QtWidgets.QMainWindow, design.Ui_MainWindow):
         self.thread_manager = ThreadManager()
         self.current_loading_model.setText("Загрузка модуля обработки...\nШаг (1 из 3)")
         self.thread_manager.add_task("prepare", self.load_tensorflow)
+
         self.analyzer = None
         self.electrophoresis_image_path = None
         self.western_blot_image_path = None
         self.electrophoresis_image = None
         self.western_blot_image = None
+        self.out_visualized_image = None
+        self.out_visualized_electrophoresis_image = None
+
+        self.out_visualized_western_blot_image = None
+        self.data_for_saving = None
         self.loadElectrophoresisImageButton.clicked.connect(self.load_electrophoresis)
         self.loadWesternBlotImageButton.clicked.connect(self.load_western_blot)
         self.startLoadingButton.clicked.connect(self.load_images)
@@ -44,6 +50,13 @@ class App(QtWidgets.QMainWindow, design.Ui_MainWindow):
         self.marginVerticalSlider.valueChanged.connect(self.update_margin_on_spinners)
         self.marginVerticalSliderValue.valueChanged.connect(self.update_margin_on_sliders)
         self.marginHorizontalSliderValue.valueChanged.connect(self.update_margin_on_sliders)
+        self.openOutputImageButton.clicked.connect(
+            lambda: self.open_visualization_in_window(self.out_visualized_image))
+        self.openOutputElectrophoresisButton.clicked.connect(
+            lambda: self.open_visualization_in_window(self.out_visualized_electrophoresis_image))
+        self.openOutputWesternBlotButton.clicked.connect(
+            lambda: self.open_visualization_in_window(self.out_visualized_western_blot_image))
+        self.saveDataButton.clicked.connect(lambda: self.save_data(**self.data_for_saving))
 
     def closeEvent(self, event):
         msg = QMessageBox(self)
@@ -256,10 +269,18 @@ class App(QtWidgets.QMainWindow, design.Ui_MainWindow):
     def load_images(self):
         self.set_notify("Анализ данных, подождите...")
         self.startLoadingButton.setEnabled(False)
-        self.analyzer.load_images(self.electrophoresis_image_path, self.western_blot_image_path)
-        self.analyzer.load_models_detections()
-        self.load_all_images()
-        self.clear_notify()
+
+        def start_analyze():
+
+            self.analyzer.load_images(self.electrophoresis_image_path, self.western_blot_image_path)
+            self.analyzer.load_models_detections()
+
+        def stop_analyze():
+            self.load_all_images()
+            self.clear_notify()
+
+        self.thread_manager.add_task("analyze", start_analyze, stop_analyze)
+
         # self.screensWidget.setCurrentIndex(1)
 
     def switch_next(self):
@@ -279,20 +300,20 @@ class App(QtWidgets.QMainWindow, design.Ui_MainWindow):
                                                                y_offset_hint=self.marginVerticalSlider.value() / 100)
         e_boxes, e_classes, e_scores, w_boxes, w_classes, w_scores, any_btypes = self.analyzer.analyze_any()
         original_image = self.get_original_visualization_image()
-        out_visualized = self.analyzer.visualize(boxes, classes, scores, btypes, original_image,
-                                                 self.marginHorizontalSlider.value() / 100,
-                                                 self.marginVerticalSlider.value() / 100)
+        self.out_visualized_image = self.analyzer.visualize(boxes, classes, scores, btypes, original_image,
+                                                            self.marginHorizontalSlider.value() / 100,
+                                                            self.marginVerticalSlider.value() / 100)
 
-        out_visualized_electrophoresis = self.analyzer.visualize(boxes, classes, scores, btypes,
-                                                                 self.analyzer.electrophoresis_image,
-                                                                 self.marginHorizontalSlider.value() / 100,
-                                                                 self.marginVerticalSlider.value() / 100,
-                                                                 [ELECTROPHORESIS_TYPE])
-        out_visualized_western_blot = self.analyzer.visualize(boxes, classes, scores, btypes,
-                                                              self.analyzer.western_blot_image,
-                                                              self.marginHorizontalSlider.value() / 100,
-                                                              self.marginVerticalSlider.value() / 100,
-                                                              [WESTERN_BLOT_TYPE])
+        self.out_visualized_electrophoresis_image = self.analyzer.visualize(boxes, classes, scores, btypes,
+                                                                            self.analyzer.electrophoresis_image,
+                                                                            self.marginHorizontalSlider.value() / 100,
+                                                                            self.marginVerticalSlider.value() / 100,
+                                                                            [ELECTROPHORESIS_TYPE])
+        self.out_visualized_western_blot_image = self.analyzer.visualize(boxes, classes, scores, btypes,
+                                                                         self.analyzer.western_blot_image,
+                                                                         self.marginHorizontalSlider.value() / 100,
+                                                                         self.marginVerticalSlider.value() / 100,
+                                                                         [WESTERN_BLOT_TYPE])
 
         # e_pixmap = convert_to_pixmap(electrophoresis_visualized)
 
@@ -302,17 +323,17 @@ class App(QtWidgets.QMainWindow, design.Ui_MainWindow):
         # w_pixmap = w_pixmap.scaledToWidth(self.westernBlotImage.width())
         # w_pixmap = w_pixmap.scaledToHeight(self.westernBlotImage.height())
         # Итоговая визуализация
-        o_pixmap = convert_to_pixmap(out_visualized)
+        o_pixmap = convert_to_pixmap(self.out_visualized_image)
         o_pixmap = o_pixmap.scaledToWidth(self.visualisationImage.width())
         o_pixmap = o_pixmap.scaledToHeight(self.visualisationImage.height())
         self.visualisationImage.setPixmap(o_pixmap)
         # Визуальзация только белков электрофореза
-        o_pixmap = convert_to_pixmap(out_visualized_electrophoresis)
+        o_pixmap = convert_to_pixmap(self.out_visualized_electrophoresis_image)
         o_pixmap = o_pixmap.scaledToWidth(self.electrophoresisImage.width())
         o_pixmap = o_pixmap.scaledToHeight(self.electrophoresisImage.height())
         self.electrophoresisImage.setPixmap(o_pixmap)
         # Визуализация только белков вестерн-блота
-        o_pixmap = convert_to_pixmap(out_visualized_western_blot)
+        o_pixmap = convert_to_pixmap(self.out_visualized_western_blot_image)
         o_pixmap = o_pixmap.scaledToWidth(self.westernBlotImage.width())
         o_pixmap = o_pixmap.scaledToHeight(self.westernBlotImage.height())
         self.westernBlotImage.setPixmap(o_pixmap)
@@ -331,22 +352,19 @@ class App(QtWidgets.QMainWindow, design.Ui_MainWindow):
         self.openOutputImageButton.setEnabled(True)
         self.openOutputElectrophoresisButton.setEnabled(True)
         self.openOutputWesternBlotButton.setEnabled(True)
-        self.openOutputImageButton.disconnect()
-        self.openOutputImageButton.clicked.connect(lambda: self.open_visualization_in_window(out_visualized))
-        self.openOutputElectrophoresisButton.clicked.connect(
-            lambda: self.open_visualization_in_window(out_visualized_electrophoresis))
-        self.openOutputWesternBlotButton.clicked.connect(
-            lambda: self.open_visualization_in_window(out_visualized_western_blot))
 
         h, w, _ = self.analyzer.electrophoresis_image.shape
-        self.saveDataButton.disconnect()
-        self.saveDataButton.clicked.connect(lambda: self.save_data(base_image_size=(w, h),
-                                                                   out_image=out_visualized,
-                                                                   boxes=boxes, classes=classes, scores=scores,
-                                                                   e_boxes=e_boxes, e_classes=e_classes,
-                                                                   e_scores=e_scores,
-                                                                   w_boxes=w_boxes, w_classes=w_classes,
-                                                                   w_scores=w_scores))
+        self.data_for_saving = {"base_image_size": (w, h),
+                                "out_image": self.out_visualized_image,
+                                "boxes": boxes,
+                                "classes": classes,
+                                "scores": scores,
+                                "e_boxes": e_boxes,
+                                "e_classes": e_classes,
+                                "e_scores": e_scores,
+                                "w_boxes": w_boxes,
+                                "w_classes": w_classes,
+                                "w_scores": w_scores}
         self.saveDataButton.setEnabled(True)
         self.load_info(boxes=boxes, e_boxes=e_boxes, w_boxes=w_boxes)
 
@@ -359,11 +377,15 @@ class App(QtWidgets.QMainWindow, design.Ui_MainWindow):
         self.info_1.setText(f"Распознанные области: {len(kwargs['boxes'])}")
         self.info_2.setText(f"Распозннаные области на снимках электрофореза: {len(kwargs['e_boxes'])}")
         self.info_3.setText(f"Распозннаные области на снимках вестерн-блота: {len(kwargs['w_boxes'])}")
-        ratio = len(kwargs['w_boxes']) / len(kwargs['e_boxes'])
+        for i in range(5):
+            l = QLabel(str(i))
+            self.verticalLayout.addWidget(l)
+        ratio = round(len(kwargs['boxes']) / (len(kwargs['e_boxes']) * len(kwargs['w_boxes'])) * 100, 2)
         self.info_4.setText(
-            f"Отношения количество белков вестерн-блота к электрофореза ({len(kwargs['w_boxes'])} к {len(kwargs['e_boxes'])}): {ratio:.3f}")
+            f"Доля белков, присутствующих на обоих фото: ({len(kwargs['boxes'])} к {len(kwargs['e_boxes']) * len(kwargs['w_boxes'])}): {ratio:.3f}%")
 
     def save_data(self, **kwargs):
+
         filename = QFileDialog.getExistingDirectory(
             self,
             "Выберите путь сохранения данных обработки снимков",

@@ -992,7 +992,7 @@ QPushButton:pressed {
          <x>0</x>
          <y>60</y>
          <width>371</width>
-         <height>251</height>
+         <height>241</height>
         </rect>
        </property>
        <layout class="QVBoxLayout" name="verticalLayout">

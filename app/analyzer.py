@@ -59,8 +59,8 @@ class Analyzer:
             electrophoresis_proteins_class = self.electrophoresis_model.classes[0][i]
             e_y1, e_x1, e_y2, e_x2 = self.electrophoresis_model.boxes[0][i]
             electrophoresis_proteins_score = self.electrophoresis_model.scores[0][i]
-                # intersections = self.find_intersection((w_x1, w_y1, w_x2, w_y2), (e_x1, e_y1, e_x2, e_y2))
-                # if intersections is not None:
+            # intersections = self.find_intersection((w_x1, w_y1, w_x2, w_y2), (e_x1, e_y1, e_x2, e_y2))
+            # if intersections is not None:
             if electrophoresis_proteins_score >= trigger_threshold:
                 e_boxes.append((float(e_x1), float(e_y1), float(e_x2), float(e_y2)))
                 e_classes.append(self.CLASES[int(electrophoresis_proteins_class) - 1])
@@ -71,11 +71,9 @@ class Analyzer:
             w_y1, w_x1, w_y2, w_x2 = self.western_blot_model.boxes[0][j]
             western_blot_proteins_score = self.western_blot_model.scores[0][j]
 
-
-                # intersections = self.find_intersection((w_x1, w_y1, w_x2, w_y2), (e_x1, e_y1, e_x2, e_y2))
-                # if intersections is not None:
+            # intersections = self.find_intersection((w_x1, w_y1, w_x2, w_y2), (e_x1, e_y1, e_x2, e_y2))
+            # if intersections is not None:
             if western_blot_proteins_score >= trigger_threshold:
-
                 w_boxes.append((float(w_x1), float(w_y1), float(w_x2), float(w_y2)))
                 w_classes.append(self.CLASES[int(western_blot_proteins_class) - 1])
                 w_scores.append(float(western_blot_proteins_score))  # convert float32 to float
@@ -149,25 +147,18 @@ class Analyzer:
                 continue
             if t == ELECTROPHORESIS_TYPE and ELECTROPHORESIS_TYPE in viz_allow:
                 border_color = 255, 100, 100
-                x1 = int(x1 * width)
-                x2 = int(x2 * width)
-                y1 = int(y1 * height)
-                y2 = int(y2 * height)
+
 
             elif t == WESTERN_BLOT_TYPE and WESTERN_BLOT_TYPE in viz_allow:
                 border_color = 200, 200, 100
-                x1 = int((x1 + x_offset_hint) * width)
-                x2 = int((x2 + x_offset_hint) * width)
-                y1 = int((y1 + y_offset_hint) * height)
-                y2 = int((y2 + y_offset_hint) * height)
 
             if t == PROTEIN_TYPE and PROTEIN_TYPE in viz_allow:
                 border_color = 100, 255, 100
 
-                x1 = int(x1 * width)
-                x2 = int(x2 * width)
-                y1 = int(y1 * height)
-                y2 = int(y2 * height)
+            x1 = int(x1 * width)
+            x2 = int(x2 * width)
+            y1 = int(y1 * height)
+            y2 = int(y2 * height)
             cv2.rectangle(image_np, (x1, y1), (x2, y2), border_color, border_radius)
             label = f"Белок"
             # cv2.putText(image_np, label, (x1, y1 - 10),
