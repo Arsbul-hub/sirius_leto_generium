@@ -992,10 +992,55 @@ QPushButton:pressed {
          <x>0</x>
          <y>60</y>
          <width>371</width>
-         <height>241</height>
+         <height>281</height>
         </rect>
        </property>
        <layout class="QVBoxLayout" name="verticalLayout">
+        <item>
+         <widget class="QLabel" name="info_1">
+          <property name="font">
+           <font>
+            <family>inter</family>
+            <pointsize>10</pointsize>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QLabel {
+		font-family: &quot;inter&quot;;
+}</string>
+          </property>
+          <property name="text">
+           <string>Распознанные области: нет</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="info_2">
+          <property name="font">
+           <font>
+            <family>inter</family>
+            <pointsize>10</pointsize>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QLabel {
+		font-family: &quot;inter&quot;;
+}</string>
+          </property>
+          <property name="text">
+           <string>Распозннаные области на снимках электрофореза: нет</string>
+          </property>
+          <property name="scaledContents">
+           <bool>false</bool>
+          </property>
+          <property name="wordWrap">
+           <bool>true</bool>
+          </property>
+          <property name="openExternalLinks">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </item>
         <item>
          <widget class="QLabel" name="info_3">
           <property name="font">
@@ -1050,51 +1095,6 @@ QPushButton:pressed {
           </property>
           <property name="openExternalLinks">
            <bool>false</bool>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QLabel" name="info_2">
-          <property name="font">
-           <font>
-            <family>inter</family>
-            <pointsize>10</pointsize>
-           </font>
-          </property>
-          <property name="styleSheet">
-           <string notr="true">QLabel {
-		font-family: &quot;inter&quot;;
-}</string>
-          </property>
-          <property name="text">
-           <string>Распозннаные области на снимках электрофореза: нет</string>
-          </property>
-          <property name="scaledContents">
-           <bool>false</bool>
-          </property>
-          <property name="wordWrap">
-           <bool>true</bool>
-          </property>
-          <property name="openExternalLinks">
-           <bool>false</bool>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QLabel" name="info_1">
-          <property name="font">
-           <font>
-            <family>inter</family>
-            <pointsize>10</pointsize>
-           </font>
-          </property>
-          <property name="styleSheet">
-           <string notr="true">QLabel {
-		font-family: &quot;inter&quot;;
-}</string>
-          </property>
-          <property name="text">
-           <string>Распознанные области: нет</string>
           </property>
          </widget>
         </item>

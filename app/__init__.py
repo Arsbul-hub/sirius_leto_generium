@@ -1,23 +1,14 @@
 import datetime
 import json
-import sys  # sys нужен для передачи argv в QApplication
-import time
-from functools import partial
 from pathlib import Path
-from threading import Thread
 
 import cv2
-import numpy as np
-from PIL import Image
 from PyQt5 import QtWidgets
-from PyQt5.QtGui import QPixmap, QImage
-from PyQt5.QtWidgets import QFileDialog, QApplication, QMessageBox, QLabel
+from PyQt5.QtWidgets import QFileDialog, QMessageBox
 
 from app import design
-
-from PIL import ImageQt
-from app.imageWindow import ImageViewer
 from app.ThreadManager import ThreadManager
+from app.imageWindow import ImageViewer
 from app.tools import *
 
 
@@ -271,7 +262,6 @@ class App(QtWidgets.QMainWindow, design.Ui_MainWindow):
         self.startLoadingButton.setEnabled(False)
 
         def start_analyze():
-
             self.analyzer.load_images(self.electrophoresis_image_path, self.western_blot_image_path)
             self.analyzer.load_models_detections()
 
@@ -353,8 +343,9 @@ class App(QtWidgets.QMainWindow, design.Ui_MainWindow):
         self.openOutputElectrophoresisButton.setEnabled(True)
         self.openOutputWesternBlotButton.setEnabled(True)
 
-        h, w, _ = self.analyzer.electrophoresis_image.shape
-        self.data_for_saving = {"base_image_size": (w, h),
+        h_e, w_e, _ = self.analyzer.electrophoresis_image.shape
+        h_w, w_w, _ = self.analyzer.western_blot_image.shape
+        self.data_for_saving = {"base_image_size": (w_e, h_e),
                                 "out_image": self.out_visualized_image,
                                 "boxes": boxes,
                                 "classes": classes,
@@ -366,7 +357,8 @@ class App(QtWidgets.QMainWindow, design.Ui_MainWindow):
                                 "w_classes": w_classes,
                                 "w_scores": w_scores}
         self.saveDataButton.setEnabled(True)
-        self.load_info(boxes=boxes, e_boxes=e_boxes, w_boxes=w_boxes)
+        self.load_info(boxes=boxes, e_boxes=e_boxes, w_boxes=w_boxes, electroforesis_size=(w_e, h_e),
+                       western_blot_size=(w_w, h_w))
 
         # electrophoresis_visualized = visualize(e_boxes, e_classes, e_scores, self.analyzer.electrophoresis_image)
         #
@@ -374,13 +366,19 @@ class App(QtWidgets.QMainWindow, design.Ui_MainWindow):
         # blended_image = np.array(self.load_visualization_image())
 
     def load_info(self, **kwargs):
+        w_e, h_e = kwargs["electroforesis_size"]
+        w_w, h_w = kwargs["western_blot_size"]
         self.info_1.setText(f"Распознанные области: {len(kwargs['boxes'])}")
         self.info_2.setText(f"Распозннаные области на снимках электрофореза: {len(kwargs['e_boxes'])}")
         self.info_3.setText(f"Распозннаные области на снимках вестерн-блота: {len(kwargs['w_boxes'])}")
-        for i in range(5):
-            l = QLabel(str(i))
-            self.verticalLayout.addWidget(l)
-        ratio = round(len(kwargs['boxes']) / (len(kwargs['e_boxes']) * len(kwargs['w_boxes'])) * 100, 2)
+
+        print(kwargs['boxes'])
+        print("#####")
+        print(kwargs['e_boxes'])
+        print("#####")
+        print(kwargs['w_boxes'])
+
+        ratio = round((len(kwargs['boxes']) / (len(kwargs['e_boxes']) * len(kwargs['w_boxes']))) * 100, 1)
         self.info_4.setText(
             f"Доля белков, присутствующих на обоих фото: ({len(kwargs['boxes'])} к {len(kwargs['e_boxes']) * len(kwargs['w_boxes'])}): {ratio:.3f}%")
 
