@@ -1,0 +1,6 @@
+<RCC>
+  <qresource prefix="background-image">
+    <file>generium_logo.png</file>
+    <file>background-image.png</file>
+  </qresource>
+</RCC>
