@@ -10,7 +10,7 @@
     <x>0</x>
     <y>0</y>
     <width>1500</width>
-    <height>876</height>
+    <height>880</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -156,7 +156,7 @@ background-position: center;
           <x>5</x>
           <y>130</y>
           <width>381</width>
-          <height>31</height>
+          <height>41</height>
          </rect>
         </property>
         <property name="font">
@@ -303,10 +303,14 @@ QPushButton:pressed {
 QLabel {
 		font-family: &quot;inter&quot;;
 		border: 1px solid gray;
+		background-color: #7576D6
 }</string>
        </property>
        <property name="text">
-        <string>Не загружено</string>
+        <string/>
+       </property>
+       <property name="pixmap">
+        <pixmap resource="app/resources/images.qrc">:/background-image/background-image.png</pixmap>
        </property>
        <property name="alignment">
         <set>Qt::AlignCenter</set>
@@ -417,7 +421,7 @@ QPushButton:pressed {
           <x>5</x>
           <y>120</y>
           <width>381</width>
-          <height>31</height>
+          <height>41</height>
          </rect>
         </property>
         <property name="font">
@@ -508,10 +512,14 @@ QPushButton:pressed {
 QLabel {
 		font-family: &quot;inter&quot;;
 		border: 1px solid gray;
+		background-color: #7576D6
 }</string>
        </property>
        <property name="text">
-        <string>Не загружено</string>
+        <string/>
+       </property>
+       <property name="pixmap">
+        <pixmap resource="app/resources/images.qrc">:/background-image/background-image.png</pixmap>
        </property>
        <property name="alignment">
         <set>Qt::AlignCenter</set>
@@ -577,10 +585,14 @@ QLabel {
 QLabel {
 		font-family: &quot;inter&quot;;
 		border: 1px solid gray;
+		background-color: #7576D6
 }</string>
        </property>
        <property name="text">
-        <string>Не загружено</string>
+        <string/>
+       </property>
+       <property name="pixmap">
+        <pixmap resource="app/resources/images.qrc">:/background-image/background-image.png</pixmap>
        </property>
        <property name="alignment">
         <set>Qt::AlignCenter</set>
@@ -646,53 +658,6 @@ QPushButton:pressed {
          <string>Начать обработку</string>
         </property>
        </widget>
-       <widget class="QSpinBox" name="marginHorizontalSliderValue">
-        <property name="geometry">
-         <rect>
-          <x>600</x>
-          <y>330</y>
-          <width>42</width>
-          <height>22</height>
-         </rect>
-        </property>
-        <property name="minimum">
-         <number>-50</number>
-        </property>
-        <property name="maximum">
-         <number>50</number>
-        </property>
-        <property name="displayIntegerBase">
-         <number>10</number>
-        </property>
-       </widget>
-       <widget class="QSlider" name="marginVerticalSlider">
-        <property name="geometry">
-         <rect>
-          <x>0</x>
-          <y>330</y>
-          <width>591</width>
-          <height>22</height>
-         </rect>
-        </property>
-        <property name="styleSheet">
-         <string notr="true"/>
-        </property>
-        <property name="minimum">
-         <number>-50</number>
-        </property>
-        <property name="maximum">
-         <number>50</number>
-        </property>
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
-        </property>
-        <property name="tickPosition">
-         <enum>QSlider::TicksAbove</enum>
-        </property>
-        <property name="tickInterval">
-         <number>3</number>
-        </property>
-       </widget>
        <widget class="QPushButton" name="openOutputImageButton">
         <property name="enabled">
          <bool>false</bool>
@@ -739,56 +704,6 @@ QPushButton:pressed {
         </property>
         <property name="text">
          <string>Открыть полностью</string>
-        </property>
-       </widget>
-       <widget class="QSlider" name="marginHorizontalSlider">
-        <property name="geometry">
-         <rect>
-          <x>0</x>
-          <y>240</y>
-          <width>591</width>
-          <height>22</height>
-         </rect>
-        </property>
-        <property name="styleSheet">
-         <string notr="true"/>
-        </property>
-        <property name="minimum">
-         <number>-50</number>
-        </property>
-        <property name="maximum">
-         <number>50</number>
-        </property>
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
-        </property>
-        <property name="invertedAppearance">
-         <bool>false</bool>
-        </property>
-        <property name="invertedControls">
-         <bool>false</bool>
-        </property>
-        <property name="tickPosition">
-         <enum>QSlider::TicksAbove</enum>
-        </property>
-        <property name="tickInterval">
-         <number>3</number>
-        </property>
-       </widget>
-       <widget class="QSpinBox" name="marginVerticalSliderValue">
-        <property name="geometry">
-         <rect>
-          <x>600</x>
-          <y>240</y>
-          <width>42</width>
-          <height>22</height>
-         </rect>
-        </property>
-        <property name="minimum">
-         <number>-50</number>
-        </property>
-        <property name="maximum">
-         <number>50</number>
         </property>
        </widget>
        <widget class="QLabel" name="label">
@@ -839,67 +754,180 @@ font-weight: &quot;normal&quot;;</string>
          <bool>true</bool>
         </property>
        </widget>
-       <widget class="QLabel" name="label_4">
+       <widget class="QWidget" name="offsetsControlls" native="true">
         <property name="geometry">
          <rect>
-          <x>230</x>
-          <y>200</y>
-          <width>191</width>
-          <height>21</height>
+          <x>0</x>
+          <y>180</y>
+          <width>641</width>
+          <height>191</height>
          </rect>
         </property>
-        <property name="font">
-         <font>
-          <family>inter</family>
-          <pointsize>10</pointsize>
-          <weight>50</weight>
-          <bold>false</bold>
-         </font>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">font-family: &quot;inter&quot;;
+        <widget class="QLabel" name="label_4">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
+         <property name="geometry">
+          <rect>
+           <x>0</x>
+           <y>20</y>
+           <width>641</width>
+           <height>21</height>
+          </rect>
+         </property>
+         <property name="font">
+          <font>
+           <family>inter</family>
+           <pointsize>10</pointsize>
+           <weight>50</weight>
+           <bold>false</bold>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">font-family: &quot;inter&quot;;
 color: black;
 font-weight: &quot;normal&quot;;</string>
-        </property>
-        <property name="text">
-         <string>Отступ по ширине:</string>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignCenter</set>
-        </property>
-       </widget>
-       <widget class="QLabel" name="label_8">
-        <property name="geometry">
-         <rect>
-          <x>230</x>
-          <y>290</y>
-          <width>191</width>
-          <height>21</height>
-         </rect>
-        </property>
-        <property name="font">
-         <font>
-          <family>inter</family>
-          <pointsize>10</pointsize>
-          <weight>50</weight>
-          <bold>false</bold>
-         </font>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">font-family: &quot;inter&quot;;
+         </property>
+         <property name="text">
+          <string>Отступ по ширине:</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+        <widget class="QSlider" name="marginHorizontalSlider">
+         <property name="geometry">
+          <rect>
+           <x>0</x>
+           <y>60</y>
+           <width>591</width>
+           <height>22</height>
+          </rect>
+         </property>
+         <property name="styleSheet">
+          <string notr="true"/>
+         </property>
+         <property name="minimum">
+          <number>-50</number>
+         </property>
+         <property name="maximum">
+          <number>50</number>
+         </property>
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="invertedAppearance">
+          <bool>false</bool>
+         </property>
+         <property name="invertedControls">
+          <bool>false</bool>
+         </property>
+         <property name="tickPosition">
+          <enum>QSlider::TicksAbove</enum>
+         </property>
+         <property name="tickInterval">
+          <number>3</number>
+         </property>
+        </widget>
+        <widget class="QSpinBox" name="marginHorizontalSliderValue">
+         <property name="geometry">
+          <rect>
+           <x>600</x>
+           <y>60</y>
+           <width>42</width>
+           <height>22</height>
+          </rect>
+         </property>
+         <property name="minimum">
+          <number>-50</number>
+         </property>
+         <property name="maximum">
+          <number>50</number>
+         </property>
+         <property name="displayIntegerBase">
+          <number>10</number>
+         </property>
+        </widget>
+        <widget class="QLabel" name="label_8">
+         <property name="geometry">
+          <rect>
+           <x>0</x>
+           <y>100</y>
+           <width>641</width>
+           <height>21</height>
+          </rect>
+         </property>
+         <property name="font">
+          <font>
+           <family>inter</family>
+           <pointsize>10</pointsize>
+           <weight>50</weight>
+           <bold>false</bold>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">font-family: &quot;inter&quot;;
 color: black;
 font-weight: &quot;normal&quot;;</string>
-        </property>
-        <property name="text">
-         <string>Отступ по высоте:</string>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignCenter</set>
-        </property>
+         </property>
+         <property name="text">
+          <string>Отступ по высоте:</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+        <widget class="QSlider" name="marginVerticalSlider">
+         <property name="geometry">
+          <rect>
+           <x>0</x>
+           <y>140</y>
+           <width>591</width>
+           <height>22</height>
+          </rect>
+         </property>
+         <property name="styleSheet">
+          <string notr="true"/>
+         </property>
+         <property name="minimum">
+          <number>-50</number>
+         </property>
+         <property name="maximum">
+          <number>50</number>
+         </property>
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="tickPosition">
+          <enum>QSlider::TicksAbove</enum>
+         </property>
+         <property name="tickInterval">
+          <number>3</number>
+         </property>
+        </widget>
+        <widget class="QSpinBox" name="marginVerticalSliderValue">
+         <property name="geometry">
+          <rect>
+           <x>600</x>
+           <y>140</y>
+           <width>41</width>
+           <height>21</height>
+          </rect>
+         </property>
+         <property name="minimum">
+          <number>-50</number>
+         </property>
+         <property name="maximum">
+          <number>50</number>
+         </property>
+        </widget>
        </widget>
       </widget>
      </widget>
      <widget class="QWidget" name="widget_6" native="true">
+      <property name="enabled">
+       <bool>true</bool>
+      </property>
       <property name="geometry">
        <rect>
         <x>1120</x>
@@ -907,6 +935,9 @@ font-weight: &quot;normal&quot;;</string>
         <width>371</width>
         <height>841</height>
        </rect>
+      </property>
+      <property name="whatsThis">
+       <string/>
       </property>
       <widget class="QLabel" name="label_3">
        <property name="geometry">
@@ -944,7 +975,7 @@ font-weight: &quot;normal&quot;;</string>
        </property>
        <property name="geometry">
         <rect>
-         <x>40</x>
+         <x>30</x>
          <y>770</y>
          <width>301</width>
          <height>51</height>
@@ -992,7 +1023,7 @@ QPushButton:pressed {
          <x>0</x>
          <y>60</y>
          <width>371</width>
-         <height>281</height>
+         <height>451</height>
         </rect>
        </property>
        <layout class="QVBoxLayout" name="verticalLayout">
@@ -1010,7 +1041,7 @@ QPushButton:pressed {
 }</string>
           </property>
           <property name="text">
-           <string>Распознанные области: нет</string>
+           <string>Пусто</string>
           </property>
          </widget>
         </item>
@@ -1028,7 +1059,7 @@ QPushButton:pressed {
 }</string>
           </property>
           <property name="text">
-           <string>Распозннаные области на снимках электрофореза: нет</string>
+           <string/>
           </property>
           <property name="scaledContents">
            <bool>false</bool>
@@ -1055,7 +1086,7 @@ QPushButton:pressed {
 }</string>
           </property>
           <property name="text">
-           <string>Распозннаные области на снимках вестерн-блота: нет</string>
+           <string/>
           </property>
           <property name="scaledContents">
            <bool>false</bool>
@@ -1082,7 +1113,37 @@ QPushButton:pressed {
 }</string>
           </property>
           <property name="text">
-           <string>Отношения количество белков вестерн-блота к электрофореза: нет</string>
+           <string/>
+          </property>
+          <property name="scaledContents">
+           <bool>false</bool>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+          </property>
+          <property name="wordWrap">
+           <bool>true</bool>
+          </property>
+          <property name="openExternalLinks">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="info_5">
+          <property name="font">
+           <font>
+            <family>inter</family>
+            <pointsize>10</pointsize>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QLabel {
+		font-family: &quot;inter&quot;;
+}</string>
+          </property>
+          <property name="text">
+           <string/>
           </property>
           <property name="scaledContents">
            <bool>false</bool>
@@ -1099,6 +1160,33 @@ QPushButton:pressed {
          </widget>
         </item>
        </layout>
+      </widget>
+      <widget class="QCheckBox" name="allowAreaCalculationCheckbox">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+       <property name="geometry">
+        <rect>
+         <x>30</x>
+         <y>730</y>
+         <width>331</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <family>inter</family>
+         <pointsize>10</pointsize>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QCheckBox {
+		font-family: &quot;inter&quot;;
+}</string>
+       </property>
+       <property name="text">
+        <string>Отобразить вычисления по площади</string>
+       </property>
       </widget>
      </widget>
      <widget class="Line" name="line">

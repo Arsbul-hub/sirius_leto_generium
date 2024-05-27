@@ -1,5 +1,5 @@
 import numpy as np
-from PIL import Image
+from PIL import Image, ImageDraw, ImageFont
 from PyQt5.QtGui import QPixmap, QImage
 
 WESTERN_BLOT_TYPE = 0
@@ -44,3 +44,38 @@ def find_intersection(rect1, rect2):
         return x_top_left, y_top_left, x_bottom_right, y_bottom_right
     else:
         return None
+
+
+def get_box_area(box, w, h):
+    x1, y1, x2, y2 = box
+    dx = x2 * w - x1 * w
+    dy = y2 * h - y1 * h
+    return dx * dy
+
+
+def get_boxes_area(boxes, w, h):
+    area_sum = 0
+    for box in boxes:
+        area_sum += get_box_area(box, w, h)
+    return area_sum
+
+
+def convert_image_to_generium_output(pil_image):
+    w, h = pil_image.size
+    offset_x = w * .18
+    offset_y = h * .18
+    new = Image.new("L", (int(w + offset_x), int(h + offset_y)), 255)
+    s_w = int(w * .13)
+    s_h = int(h * .13)
+    new.paste(pil_image, (s_w, s_h))
+    d1 = ImageDraw.Draw(new)
+    font = ImageFont.truetype('app/fonts/arial.ttf', int(w * .05) + int(h * .01))
+    d1.text((s_w + int(w * .05), s_h / 2 - int(h * .05) / 2), "3", fill=0, font=font)
+    d1.text((s_w + int(w * .05) + w / 4 - int(w * .05) / 2, s_h / 2 - int(h * .05) / 2), "<", fill=0, font=font)
+    d1.text((s_w + w / 2 - int(w * .05) / 2, s_h / 2 - int(h * .05) / 2), "PI", fill=0, font=font)
+    d1.text((s_w - int(w * .05) + (w * 3) / 4 - int(w * .05) / 2, s_h / 2 - int(h * .05) / 2), ">", fill=0, font=font)
+    d1.text((s_w - int(w * .05) + w - int(offset_x) / 2, s_h / 2 - int(h * .05) / 2), "10", fill=0, font=font)
+    d1.text((s_w / 2 - int(w * .05), s_h + int(h * .1)), "HMW", fill=0, font=font)
+    d1.text((s_w / 2 - int(w * .05), s_h + h - int(h * .1)), "LMW", fill=0, font=font)
+
+    return new
